@@ -1,11 +1,11 @@
 
 #include <ESP8266WiFi.h>
 
-const char* ssid = "Redmi";
-const char* password = "12345678";
+const char* ssid = "TaoLaGa49";
+const char* password = "longcoi123";
 
-IPAddress staticIP(192, 168, 43, 30);
-IPAddress gateway(192, 168, 43, 1);
+IPAddress staticIP(192, 168, 94, 30);
+IPAddress gateway(192, 168, 94, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 void setup(void)

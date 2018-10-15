@@ -2,27 +2,60 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 
+char auth[] = "a72488240cb24d7e979684466c809887";        //Token cua blynk
+//char ssid[] = "iPhone";        //Ten wifi
+//char pass[] = "longcoi12345";         //Pass wifi
+//char ssid[] = "TaoLaGa49";    
+//char pass[] = "longcoi123";
 
-char auth[] = "2d6ec2f6e3bd4cb6b5ab9c0de16e0f64";        //Token cua blynk
-char ssid[] = "Redmi";        //Ten wifi
-char pass[] = "12345678";         //Pass wifi
+char ssid[] = "Connectify-NSTV";    
+char pass[] = "passpass2018";
+
+
 
 void setup() {
   Serial.begin(9600);                   // Mo Serial
   Blynk.begin(auth, ssid, pass);        // Ket noi voi blynk
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(3, OUTPUT);
+}
+BLYNK_WRITE(3)
+{
+  int i = param.asInt();
+  if (i == 0)
+  {
+    digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(3, HIGH);
+  }
+  else
+  {
+    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(3, LOW);
+  }
+}
+
+BLYNK_WRITE(2)
+{
+  int i = param.asInt();
+  while (true)
+  {
+    if(i==0) break;
+    {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(100);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay (100);
+    }
+  }
+  digitalWrite(LED_BUILTIN, LOW);
 }
 void loop()
 {
   for (int i = 100; i < 1000; i = i + 50)
   {
-    Blynk.virtualWrite(V4, i); //up
-    digitalWrite(LED_BUILTIN, LOW);
-    delay (500);
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay (500);
-   Serial.printf("nhiet do dang la: %d \n", i);
+    Blynk.virtualWrite(V1, i); //up
+    Serial.printf("nhiet do dang la: %d \n", i);
     Blynk.run(); // Chay Blynk
+    delay (100);
   }
-
 }
