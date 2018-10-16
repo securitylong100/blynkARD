@@ -1,8 +1,8 @@
 
 #include <ESP8266WiFi.h>
 
-const char* ssid = "TaoLaGa49";
-const char* password = "longcoi123";
+const char* ssid = "Connectify-NSTV";
+const char* password = "passpass2018";
 
 IPAddress staticIP(192, 168, 94, 30);
 IPAddress gateway(192, 168, 94, 1);
