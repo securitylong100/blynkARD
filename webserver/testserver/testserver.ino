@@ -14,8 +14,8 @@ const char MAIN_page[] PROGMEM = R"=====(
 <body>
 <center>
 <h1>WiFi LED on off demo: 1</h1><br>
-Ciclk to turn <a href="ledOn">LED ON</a><br>
-Ciclk to turn <a href="ledOff">LED OFF</a><br>
+Click to turn <a href="ledOn">LED ON</a><br>
+Click to turn <a href="ledOff">LED OFF</a><br>
 <hr>
 <a href="https://circuits4you.com">www.</a>
 </center>
@@ -28,8 +28,8 @@ Ciclk to turn <a href="ledOff">LED OFF</a><br>
 #define LED 2  
  
 //SSID and Password of your WiFi router
-const char* ssid = "Connectify-NSTV";
-const char* password = "passpass2018";
+const char* ssid = "TaoLaGa49";
+const char* password = "longcoi123";
  
 //Declare a global object variable from the ESP8266WebServer class.
 ESP8266WebServer server(80); //Server on port 80
@@ -46,12 +46,18 @@ void handleRoot() {
 void handleLEDon() { 
  Serial.println("LED on page");
  digitalWrite(LED_BUILTIN,LOW); //LED is connected in reverse
+  digitalWrite(3,LOW);
+  digitalWrite(2,HIGH);
+  digitalWrite(15,HIGH);
  server.send(200, "text/html", "LED is ON"); //Send ADC value only to client ajax request
 }
  
 void handleLEDoff() { 
  Serial.println("LED off page");
  digitalWrite(LED_BUILTIN,HIGH); //LED off
+ digitalWrite(3,HIGH);
+ digitalWrite(2,LOW);
+ digitalWrite(15,LOW);
  server.send(200, "text/html", "LED is OFF"); //Send ADC value only to client ajax request
 }
 //==============================================================
@@ -66,7 +72,9 @@ void setup(void){
   //Onboard LED port Direction output
   pinMode(LED_BUILTIN,OUTPUT); 
   //Power on LED state off
-  digitalWrite(LED_BUILTIN,HIGH);
+   pinMode(3, OUTPUT);
+   pinMode(2, OUTPUT);
+   pinMode(15, OUTPUT);
 
   // pinMode(LED_BUILTIN, OUTPUT);
   // Wait for connection

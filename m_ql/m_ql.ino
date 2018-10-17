@@ -12,12 +12,14 @@ WiFiClient client;
 MySQL_Connection conn((Client *)&client);
 
 char INSERT_SQL[] = "INSERT INTO iottechn_smarthome.m_userlogin(userlogin_id, userlogin_name, userlogin_pass, userlogin_permission, userlogin_section, userlogin_datetime) VALUES (1,'long','long','admin','FA',now())";
-char query[128];
+//char INSERT_SQL[] ="INSERT INTO `iottechn_smarthome.m_userlogin`(`userlogin_id`, `userlogin_name`, `userlogin_pass`, `userlogin_permission`, `userlogin_section`, `userlogin_datetime`) VALUES (1,'long','long','admin','FA',now())";
 
+char query[128];
+//112.213.89.26 112.213.89.26
 IPAddress server_addr(112, 213 ,89, 26);          // MySQL server IP
 //char hostname[] = "mysql06.dotvndns.vn";
 //char databasename = "iottechn_smarthome";
-char user[] = "iottechn";           // MySQL user
+char user[] = "iottechn_admin";           // MySQL user
 char password[] = "admin1@";       // MySQL password
 
 void setup() {

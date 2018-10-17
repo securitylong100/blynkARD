@@ -17,7 +17,7 @@ void setup() {
   Serial.begin(9600);                   // Mo Serial
   Blynk.begin(auth, ssid, pass);        // Ket noi voi blynk
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(3, OUTPUT);
+  pinMode(2, OUTPUT);
 }
 BLYNK_WRITE(3)
 {
@@ -25,12 +25,12 @@ BLYNK_WRITE(3)
   if (i == 0)
   {
     digitalWrite(LED_BUILTIN, HIGH);
-    digitalWrite(3, HIGH);
+    digitalWrite(2, HIGH);
   }
   else
   {
     digitalWrite(LED_BUILTIN, LOW);
-    digitalWrite(3, LOW);
+    digitalWrite(2, LOW);
   }
 }
 
