@@ -11,8 +11,7 @@ WiFiServer server(80);
 WiFiClient client;
 MySQL_Connection conn((Client *)&client);
 
-char INSERT_SQL[] = "INSERT INTO iottechn_smarthome.m_userlogin(userlogin_id, userlogin_name, userlogin_pass, userlogin_permission, userlogin_section, userlogin_datetime) VALUES (1,'long','long','admin','FA',now())";
-//char INSERT_SQL[] ="INSERT INTO `iottechn_smarthome.m_userlogin`(`userlogin_id`, `userlogin_name`, `userlogin_pass`, `userlogin_permission`, `userlogin_section`, `userlogin_datetime`) VALUES (1,'long','long','admin','FA',now())";
+char INSERT_SQL[] = "INSERT INTO iottechn_demo.test(id,name) VALUES (1,'long')";
 
 char query[128];
 //112.213.89.26 112.213.89.26
