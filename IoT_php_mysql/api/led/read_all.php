@@ -1,8 +1,13 @@
 <?php
  
+/****************************************************/
+/************** Created by : Vivek Gupta ************/
+/***************     www.vsgupta.in     *************/
+/***************     www.iotmonk.com     *************/
+/****************************************************/ 
+ 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
- 
  
 //Creating Array for JSON response
 $response = array();
@@ -11,41 +16,61 @@ $response = array();
 $filepath = realpath (dirname(__FILE__));
 require_once($filepath."/db_connect.php");
  
- // Connecting to database 
-$db = new DB_CONNECT();	
+ // Connecting to database
+$db = new DB_CONNECT();
  
- // Fire SQL query to get all data from led
-$result = mysql_query("SELECT *FROM led") or die(mysql_error());
+// Check if we got the field from the user
+if (isset($_GET["id"])) {
+    $id = $_GET['id'];
  
-// Check for succesfull execution of query and no results found
-if (mysql_num_rows($result) > 0) {
-    
-	// Storing the returned array in response
-    $response["led"] = array();
+     // Fire SQL query to get weather data by id
+    $result = mysql_query("SELECT *FROM led WHERE id = '$id'");
+	
+	//If returned result is not empty
+    if (!empty($result)) {
  
-	// While loop to store all the returned response in variable
-    while ($row = mysql_fetch_array($result)) {
-        // temperoary user array
-        $led = array();
-        $led["id"] = $row["id"];
-        $led["status"] = $row["status"];
+        // Check for succesfull execution of query and no results found
+        if (mysql_num_rows($result) > 0) {
+			
+			// Storing the returned array in response
+            $result = mysql_fetch_array($result);
+			
+			// temperoary user array
+            $led = array();
+            $led["id"] = $result["id"];
+            $led["status"] = $result["status"];
+          
+            $response["success"] = 1;
  
-		// Push all the items 
-        array_push($response["led"], $led);
+            $response["led"] = array();
+			
+			// Push all the items 
+            array_push($response["led"], $led);
+ 
+            // Show JSON response
+            echo json_encode($response);
+        } else {
+            // If no data is found
+            $response["success"] = 0;
+            $response["message"] = "No data on led found";
+ 
+            // Show JSON response
+            echo json_encode($response);
+        }
+    } else {
+        // If no data is found
+        $response["success"] = 0;
+        $response["message"] = "No data on led found";
+ 
+        // Show JSON response
+        echo json_encode($response);
     }
-    // On success
-    $response["success"] = 1;
+} else {
+    // If required parameter is missing
+    $response["success"] = 0;
+    $response["message"] = "Parameter(s) are missing. Please check the request";
  
-    // Show JSON response
-    echo json_encode($response);
-}	
-else 
-{
-    // If no data is found
-	$response["success"] = 0;
-    $response["message"] = "No data on LED found";
- 
-    // Show JSON response
+    // echoing JSON response
     echo json_encode($response);
 }
 ?>

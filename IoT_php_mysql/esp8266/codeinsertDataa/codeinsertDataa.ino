@@ -2,8 +2,10 @@
 
 //const char* ssid     = "TaoLaGa49";
 //const char* password = "longcoi123";
-const char* ssid     = "iPhone";
-const char* password = "longcoi12345";
+//const char* ssid     = "iPhone";
+//const char* password = "longcoi12345";
+const char* ssid     = "82 LAU 1";
+const char* password = "123456789";
 const char* host = "iottechno.com";
 
 void setup()
@@ -28,10 +30,12 @@ void setup()
   Serial.println(WiFi.subnetMask());
   Serial.print("Gateway: ");
   Serial.println(WiFi.gatewayIP());
+  Serial.println("MAC: ");
+   Serial.println(WiFi.macAddress());
 }
 void loop() {
-  float t = 35;
-  float h  = 40;
+  float t = 45.5;
+  float h  = 23.9;
 
 
 Serial.print("connecting to ");
