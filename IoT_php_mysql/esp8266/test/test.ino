@@ -68,22 +68,14 @@ void loop() {
   }
   Serial.print("Requesting URL: ");
   Serial.println(url);
-
   client.print(String("GET ") + url + " HTTP/1.1\r\n" +
                "Host: " + host + "\r\n" +
                "Connection: close\r\n\r\n");
-  Serial.println(String("GET ") + url + " HTTP/1.1\r\n" +
-                 "Host: " + host + "\r\n" +
-                 "Connection: close\r\n\r\n");
-  delay(5000);
+  delay(1000);
   String section = "header";
   while (client.available()) {
     String line = client.readStringUntil('\r');
-
-    //Serial.print(line);
-    // we’ll parse the HTML body here
     if (section == "header") { // headers..
-
       if (line == "\n") { // skips the empty space at the beginning
         section = "json";
       }
@@ -91,23 +83,21 @@ void loop() {
     else if (section == "json") { // print the good stuff
       section = "ignore";
       String result = line.substring(1);
-
       // Parse JSON
       int size = result.length() + 1;
       char json[size];
-
+      //  char json[] = "{\"time\":\"on\"}";
       result.toCharArray(json, size);
-      StaticJsonBuffer<300> jsonBuffer;
+      StaticJsonBuffer<200> jsonBuffer;
       JsonObject& json_parsed = jsonBuffer.parseObject(json);
-    
-      if (!json_parsed.success())
-      {
+
+      if (!json_parsed.success()) {
         Serial.println("parseObject() failed");
         return;
       }
       String led = json_parsed["led"][0]["status"];
-      Serial.println(led);
-      if (count == 1) {
+      if (count == 1)
+      {
         if (led == "on") {
           digitalWrite(LED_BUILTIN, 1);
           delay(100);
