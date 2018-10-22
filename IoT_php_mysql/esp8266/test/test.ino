@@ -1,8 +1,10 @@
 #include <ESP8266WiFi.h>
 #include <ArduinoJson.h>
+#include <SPI.h>
+#include <String.h>
 
-const char* ssid     = "82 LAU 1";
-const char* password = "123456789";
+const char* ssid     = "iPhone";
+const char* password = "longcoi12345";
 const char* host = "iottechno.com"; //replace it with your webhost url
 String url;
 int count = 0;
@@ -66,14 +68,44 @@ void loop() {
     count = count + 1;
     Serial.println("Here3");
   }
+  //code test khong chay
   Serial.print("Requesting URL: ");
   Serial.println(url);
-  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
-               "Host: " + host + "\r\n" +
-               "Connection: close\r\n\r\n");
-  delay(1000);
+  delay (1000);
+  client.println(String("GET ") + url + " HTTP/1.1\r\n" +
+                 "Host: " + host + "\r\n" +
+                 "Connection: close\r\n\r\n");
+
+  if (client.println() != 0)
+  {
+    Serial.println(String("gui tin hien di OK"));
+  }
+  else
+  {
+    Serial.println(String("Gui tin di NG"));
+    return;
+  }
+  delay(500);
+
+  char abc[] = "";
+  char strincat[] = "";
+  String a ;
+  while (client.available())
+  {
+
+    a  = client.readStringUntil('\r');
+    int size = a.length() + 1;
+    a.toCharArray(abc, size);
+    //code tu Khoi.
+    //end code
+    strncpy(strincat, abc + 0, 47);
+    strincat[47] = '\0';
+    Serial.println(strincat);
+  }
+  delay (5000);
   String section = "header";
-  while (client.available()) {
+  while (client.available())
+  {
     String line = client.readStringUntil('\r');
     if (section == "header") { // headers..
       if (line == "\n") { // skips the empty space at the beginning
@@ -86,7 +118,8 @@ void loop() {
       // Parse JSON
       int size = result.length() + 1;
       char json[size];
-      //  char json[] = "{\"time\":\"on\"}";
+      //   char json[] = "{\"time\":\"on\"}";
+      // char json[] = "{\"success\":1,\"led\":[{\"id\":\"1\",\"status\":\"on\"}]}";
       result.toCharArray(json, size);
       StaticJsonBuffer<200> jsonBuffer;
       JsonObject& json_parsed = jsonBuffer.parseObject(json);
@@ -95,7 +128,8 @@ void loop() {
         Serial.println("parseObject() failed");
         return;
       }
-      String led = json_parsed["led"][0]["status"];
+      String led = ""; //json_parsed["led"][0]["status"];
+
       if (count == 1)
       {
         if (led == "on") {
@@ -133,11 +167,9 @@ void loop() {
 
       if (count == 3)
         count = 0;
-
-
     }
   }
   Serial.println();
   Serial.println("closing connection");
-  delay(3000);
+
 }

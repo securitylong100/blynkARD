@@ -2,10 +2,10 @@
 
 //const char* ssid     = "TaoLaGa49";
 //const char* password = "longcoi123";
-//const char* ssid     = "iPhone";
-//const char* password = "longcoi12345";
-const char* ssid     = "82 LAU 1";
-const char* password = "123456789";
+const char* ssid     = "iPhone";
+const char* password = "longcoi12345";
+//const char* ssid     = "82 LAU 1";
+//const char* password = "123456789";
 const char* host = "iottechno.com";
 
 void setup()
