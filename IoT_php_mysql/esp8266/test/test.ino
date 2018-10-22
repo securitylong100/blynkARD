@@ -140,10 +140,9 @@ void loop() {
       if (count == 3)
         count = 0;
 
-
     }
   }
   Serial.println();
   Serial.println("closing connection");
-  delay(300);
+//  delay(300);
 }
