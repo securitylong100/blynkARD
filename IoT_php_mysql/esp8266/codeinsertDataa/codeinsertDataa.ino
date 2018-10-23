@@ -7,6 +7,8 @@ const char* password = "longcoi12345";
 //const char* ssid     = "82 LAU 1";
 //const char* password = "123456789";
 const char* host = "iottechno.com";
+float t = 70;
+float h  = 25;
 
 void setup()
 {
@@ -31,38 +33,42 @@ void setup()
   Serial.print("Gateway: ");
   Serial.println(WiFi.gatewayIP());
   Serial.println("MAC: ");
-   Serial.println(WiFi.macAddress());
+  Serial.println(WiFi.macAddress());
 }
 void loop() {
-  float t = 45.5;
-  float h  = 23.9;
+  t = t + 0.5;
+  h = h + 0.5;
+  if (t > 35 || h > 80)
+  {
+    t = 25;
+    h = 70;
+  }
 
+  Serial.print("connecting to ");
+  Serial.println(host);
 
-Serial.print("connecting to ");
-Serial.println(host);
+  WiFiClient client;
+  const int httpPort = 80;
+  if (!client.connect(host, httpPort)) {
+    Serial.println("connection failed");
+    return;
+  }
 
-WiFiClient client;
-const int httpPort = 80;
-if (!client.connect(host, httpPort)) {
-  Serial.println("connection failed");
-  return;
-}
+  String url = "/api/weather/insert.php?temp=" + String(t) + "&hum=" + String(h);
+  Serial.print("Requesting URL: ");
+  Serial.println(url);
 
-String url = "/api/weather/insert.php?temp=" + String(t) + "&hum=" + String(h);
-Serial.print("Requesting URL: ");
-Serial.println(url);
+  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+               "Host: " + host + "\r\n" +
+               "Connection: close\r\n\r\n");
+  delay(500);
 
-client.print(String("GET ") + url + " HTTP/1.1\r\n" +
-             "Host: " + host + "\r\n" +
-             "Connection: close\r\n\r\n");
-delay(500);
+  while (client.available()) {
+    String line = client.readStringUntil('\r');
+    Serial.print(line);
+  }
 
-while (client.available()) {
-  String line = client.readStringUntil('\r');
-  Serial.print(line);
-}
-
-Serial.println();
-Serial.println("closing connection");
-delay(3000);
+  Serial.println();
+  Serial.println("closing connection");
+  delay(3000);
 }
