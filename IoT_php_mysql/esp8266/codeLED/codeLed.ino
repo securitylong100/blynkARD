@@ -5,19 +5,20 @@
 
 const int kNetworkTimeout = 30 * 1000;
 const int kNetworkDelay = 1000;
-const char* ssid     = "82 LAU 1";
-const char* password = "123456789";
+const char* ssid     = "iPhone";
+const char* password = "longcoi12345";
 const char* host = "iottechno.com"; //replace it with your webhost url
 String url;
 int count = 0;
 void setup() {
   Serial.begin(115200);
   delay(100);
+  pinMode(16, OUTPUT);//connect pin2
+  pinMode(0, OUTPUT); //connect pin 8
+  pinMode(3, OUTPUT); //connect pin 0
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(2, OUTPUT);
-  pinMode(3, OUTPUT);
-  digitalWrite(LED_BUILTIN, 0);
-  digitalWrite(2, 0);
+  digitalWrite(16, 0);
+  digitalWrite(0, 0);
   digitalWrite(3, 0);
   Serial.println();
   Serial.println();
@@ -89,12 +90,12 @@ void loop() {
     if (i== 11)  { // print the good stuff
       i =1;
       String result = line;
-      Serial.print(result);
+     // Serial.print(result);
       // Parse JSON
       int size = result.length() + 1;
       char json[size];
       result.toCharArray(json, size);
-      StaticJsonBuffer<200> jsonBuffer;
+      StaticJsonBuffer<100> jsonBuffer;
       JsonObject& json_parsed = jsonBuffer.parseObject(json);
       if (!json_parsed.success())
       {
@@ -105,23 +106,23 @@ void loop() {
 
       if (count == 1) {
         if (led == "on") {
-          digitalWrite(LED_BUILTIN, 1);
+          digitalWrite(16, 1);
           delay(100);
           Serial.println("D1 is On..!");
         }
         else if (led == "off") {
-          digitalWrite(LED_BUILTIN, 0);
+          digitalWrite(16, 0);
           delay(100);
           Serial.println("D1 is Off..!");
         }
       }
       else if (count == 2) {
         if (led == "on") {
-          digitalWrite(2, 1);
+          digitalWrite(0, 1);
           Serial.println("D2 is On..!");
         }
         else if (led == "off") {
-          digitalWrite(2, 0);
+          digitalWrite(0, 0);
           Serial.println("D2 is Off..!");
         }
       }
