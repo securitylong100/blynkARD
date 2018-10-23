@@ -4,59 +4,64 @@
 #include <BlynkSimpleEsp8266.h>
 
 char auth[] = "a72488240cb24d7e979684466c809887";        //Token cua blynk
-//char ssid[] = "iPhone";        //Ten wifi
-//char pass[] = "longcoi12345";         //Pass wifi
-//char ssid[] = "TaoLaGa49";    
+char ssid[] = "iPhone";        //Ten wifi
+char pass[] = "longcoi12345";         //Pass wifi
+//char ssid[] = "TaoLaGa49";
 //char pass[] = "longcoi123";
-
-char ssid[] = "Connectify-NSTV";    
-char pass[] = "passpass2018";
-
-
 
 void setup() {
   Serial.begin(9600);                   // Mo Serial
   Blynk.begin(auth, ssid, pass);        // Ket noi voi blynk
-  pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(2, OUTPUT);
+  pinMode(16, OUTPUT);//phong khach V1
+  pinMode(0, OUTPUT); //phong ngu V2
+  pinMode(3, OUTPUT); //nha tam V3
+
 }
-BLYNK_WRITE(3)
+BLYNK_WRITE(1) //khoi tao phong khach
 {
   int i = param.asInt();
-  if (i == 0)
+  if (i == 1)
   {
-    digitalWrite(LED_BUILTIN, HIGH);
-    digitalWrite(2, HIGH);
+    digitalWrite(16, HIGH);
   }
   else
   {
-    digitalWrite(LED_BUILTIN, LOW);
-    digitalWrite(2, LOW);
+    digitalWrite(16, LOW);
   }
 }
 
-BLYNK_WRITE(2)
+BLYNK_WRITE(2) //khoi tao phong ngu
 {
   int i = param.asInt();
-  while (true)
+  if (i == 1)
   {
-    if(i==0) break;
-    {
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(100);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay (100);
-    }
+    digitalWrite(0, HIGH);
   }
-  digitalWrite(LED_BUILTIN, LOW);
+  else
+  {
+    digitalWrite(0, LOW);
+  }
 }
+BLYNK_WRITE(3) //khoi tao nha tam
+{
+  int i = param.asInt();
+  if (i == 1)
+  {
+    digitalWrite(3, HIGH);
+  }
+  else
+  {
+    digitalWrite(3, LOW);
+  }
+}
+//ket thuc 3 nut nhan.
 void loop()
 {
   for (int i = 100; i < 1000; i = i + 50)
   {
-    Blynk.virtualWrite(V1, i); //up
+    Blynk.virtualWrite(V0, i); //chay bien nhiet do
     Serial.printf("nhiet do dang la: %d \n", i);
     Blynk.run(); // Chay Blynk
-    delay (100);
+    delay (1000);
   }
 }
