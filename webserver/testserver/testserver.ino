@@ -1,4 +1,3 @@
-
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
  
@@ -13,7 +12,7 @@ const char MAIN_page[] PROGMEM = R"=====(
 <html>
 <body>
 <center>
-<h1>WiFi LED on off demo: 1</h1><br>
+<h1>WiFi LED on off demo webserver</h1><br>
 Click to turn <a href="ledOn">LED ON</a><br>
 Click to turn <a href="ledOff">LED OFF</a><br>
 <hr>
@@ -45,26 +44,24 @@ void handleRoot() {
  
 void handleLEDon() { 
  Serial.println("LED on page");
- digitalWrite(LED_BUILTIN,LOW); //LED is connected in reverse
-  digitalWrite(3,LOW);
-  digitalWrite(2,HIGH);
-  digitalWrite(15,HIGH);
- server.send(200, "text/html", "LED is ON"); //Send ADC value only to client ajax request
+  digitalWrite(16,HIGH);
+  digitalWrite(0,HIGH);
+  digitalWrite(3,HIGH);
+  server.send(200, "text/html", "LED is ON"); //Send ADC value only to client ajax request
 }
  
 void handleLEDoff() { 
  Serial.println("LED off page");
- digitalWrite(LED_BUILTIN,HIGH); //LED off
- digitalWrite(3,HIGH);
- digitalWrite(2,LOW);
- digitalWrite(15,LOW);
+ digitalWrite(16,LOW);
+  digitalWrite(0,LOW);
+  digitalWrite(3,LOW);
  server.send(200, "text/html", "LED is OFF"); //Send ADC value only to client ajax request
 }
 //==============================================================
 //                  SETUP
 //==============================================================
 void setup(void){
-  Serial.begin(115200);
+  Serial.begin(9600);
   
   WiFi.begin(ssid, password);     //Connect to your WiFi router
   Serial.println("");
@@ -72,9 +69,9 @@ void setup(void){
   //Onboard LED port Direction output
   pinMode(LED_BUILTIN,OUTPUT); 
   //Power on LED state off
+   pinMode(16, OUTPUT);
+   pinMode(0, OUTPUT);
    pinMode(3, OUTPUT);
-   pinMode(2, OUTPUT);
-   pinMode(15, OUTPUT);
 
   // pinMode(LED_BUILTIN, OUTPUT);
   // Wait for connection
@@ -89,7 +86,6 @@ void setup(void){
   Serial.println(ssid);
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());  //IP address assigned to your ESP
- 
   server.on("/", handleRoot);      //Which routine to handle at root location. This is display page
   server.on("/ledOn", handleLEDon); //as Per  <a href="ledOn">, Subroutine to be called
   server.on("/ledOff", handleLEDoff);
