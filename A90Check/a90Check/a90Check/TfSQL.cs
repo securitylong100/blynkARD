@@ -14,7 +14,7 @@ namespace a90Check
     {
         NpgsqlConnection connection;
         //  static string conStringIpqcDbP4 = @"Server=192.168.193.4;Port=5432;User Id=pqm;Password=dbuser;Database=ip_pqmdb; CommandTimeout=100; Timeout=100;";
-        static string conStringIpqcDbP4 = @"Server=192.168.145.12;Port=5432;User Id=pqm;Password=dbuser;Database=iot_db; CommandTimeout=100; Timeout=100;";
+        static string conStringIpqcDbP4 = @"Server=192.168.145.12;Port=5432;User Id=pqm;Password=dbuser;Database=iotdb; CommandTimeout=100; Timeout=100;";
 
         public void getComboBoxData(string sql, ref ComboBox cmb)
         {
@@ -108,6 +108,34 @@ namespace a90Check
                 adapter.Fill(dt);
             }
         }
-
+        public bool sqlExecuteNonQuery(string sql, bool result_message_show)
+        {
+            try
+            {
+                connection = new NpgsqlConnection(conStringIpqcDbP4);
+                connection.Open();
+                NpgsqlCommand command = new NpgsqlCommand(sql, connection);
+                int response = command.ExecuteNonQuery();
+                if (response >= 1)
+                {
+                    //if (result_message_show) { MessageBox.Show("Successful!", "Database Responce", MessageBoxButtons.OK, MessageBoxIcon.Information); }                    
+                    connection.Close();
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Not successful!", "Database Responce", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    connection.Close();
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Not successful!" + System.Environment.NewLine + ex.Message
+                                , "Database Responce", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                connection.Close();
+                return false;
+            }
+        }
     }
 }
