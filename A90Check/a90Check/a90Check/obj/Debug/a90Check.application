@@ -4,17 +4,18 @@
   <description asmv2:publisher="a90Check" asmv2:product="a90Check" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" trustURLParameters="true" />
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
-    <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
+    <framework targetVersion="4.0" profile="Client" supportedRuntime="4.0.30319" />
+    <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="a90Check.exe.manifest" size="5917">
+    <dependentAssembly dependencyType="install" codebase="a90Check.exe.manifest" size="5845">
       <assemblyIdentity name="a90Check.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>GUZiGu5LENT78KsY4ar049T3Vc8OE0//Q13e2WnYbo4=</dsig:DigestValue>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>ld2vAusLNygx4Xt7JRWgY+iRyoI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
