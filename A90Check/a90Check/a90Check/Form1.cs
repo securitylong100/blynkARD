@@ -18,7 +18,7 @@ namespace a90Check
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            //AcceptButton = btn_check;  
+            AcceptButton = btn_check;
             if (txt_barcode.Text !=null)
             {
 
@@ -31,7 +31,7 @@ namespace a90Check
             {
                 LoadDGV(txt_barcode2.Text, false);
                 TfSQL con = new TfSQL();
-                string sql = "select a90_status from t_checkpusha90 where  a90_barcode = '" + txt_barcode2.Text + "' order by a90_id limit 1";
+                string sql = "select a90_status from t_checkpusha90 where  a90_barcode = '" + txt_barcode2.Text + "' order by a90_id desc limit 1";
                 string status = con.sqlExecuteScalarString(sql);
                 if (status == "OK")
                 {
@@ -67,7 +67,7 @@ namespace a90Check
         {
             TfSQL tf = new TfSQL();
             DataTable dt = new DataTable();
-            string sqlDGV = "select a90_barcode, a90_status, a90_datetime from t_checkpusha90 where a90_barcode = '" + txt_barcode.Text + "' ";
+            string sqlDGV = "select a90_barcode, a90_status, a90_datetime from t_checkpusha90 where a90_barcode = '" + barcode + "' ";
 
             if (order) { sqlDGV += "order by a90_datetime desc limit 1"; }
             else { sqlDGV += "order by a90_datetime desc"; }
@@ -117,6 +117,7 @@ namespace a90Check
                     LoadDGV(txt_barcode.Text, true);
                     txt_barcode.Text = null;
                     txt_barcode.SelectNextControl(txt_barcode, true, false, true, true);
+                    timer1.Interval = int.Parse(txtTimer.Text)*1000;
                     timer1.Enabled = true;
                 }
                 else dgv.DataSource = null;
@@ -126,9 +127,11 @@ namespace a90Check
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+           
             btn_status.Text = "Waiting";
             btn_status.BackColor = SystemColors.Control;
             dgv.DataSource = null;
+            timer1.Enabled = false;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -139,6 +142,39 @@ namespace a90Check
         private void txt_barcode_MouseClick(object sender, MouseEventArgs e)
         {
             AddStatus(e);
+        }
+
+        private void txtTimer_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        string sqlExport;
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            TfSQL tf = new TfSQL();
+            string sqlExport = "select a90_barcode Barcode, a90_status status, a90_datetime DateTime from t_checkpusha90 where a90_datetime > '" + dtpFrom.Value.ToString() + "' and a90_datetime < '" + dtpTo.Value.ToString() + "' order by a90_datetime desc";
+            DataTable dt = new DataTable();
+
+            tf.sqlDataAdapterFillDatatable(sqlExport, ref dt);
+
+            ExcelClass ex = new ExcelClass();
+            ex.ExportToExcel(dt);
+        }
+
+        private void txtTimer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            TfSQL tf = new TfSQL();
+            string sqlExport = "select a90_barcode Barcode, a90_status status, a90_datetime DateTime from t_checkpusha90 where a90_datetime > '" + dtpFrom.Value.ToString() + "' and a90_datetime < '" + dtpTo.Value.ToString() + "' order by a90_datetime desc";
+            DataTable dt = new DataTable();
+
+            tf.sqlDataAdapterFillDatatable(sqlExport, ref dt);
+            dgv.DataSource = dt;
+
         }
     }
 }
