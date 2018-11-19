@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace a90Check
 {
@@ -18,7 +19,12 @@ namespace a90Check
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            TfSQL con = new TfSQL();
             AcceptButton = btn_check;
+            string sqlModel = "select distinct model_name from t_model ";
+            string sqlLine = "select distinct line_name from t_line ";
+            con.getComboBoxData(sqlModel, ref cmbModel);
+            con.getComboBoxData(sqlLine, ref cmbLine);
             if (txt_barcode.Text != null)
             {
 
@@ -51,7 +57,6 @@ namespace a90Check
                     btn_status2.Text = "WAITING";
                     txt_barcode2.Text = "";
                 }
-
             }
             else
             {
@@ -112,8 +117,8 @@ namespace a90Check
                         btn_status.BackColor = Color.Green;
                     }
                     TfSQL tf = new TfSQL();
-                    string sqlInsert = "insert into t_checkpusha90main(a90_barcode, a90_status, a90_datetime ,a90_factory) ";
-                    sqlInsert += "values('" + txt_barcode.Text + "','" + status + "', now(),'NCVP')";
+                    string sqlInsert = "insert into t_checkpusha90main(a90_model, a90_line, a90_barcode, a90_status, a90_datetime ,a90_factory) ";
+                    sqlInsert += "values('" + cmbModel.Text + "','" + cmbLine.Text + "','" + txt_barcode.Text + "','" + status + "', now(),'NCVP')";
                     if (tf.sqlExecuteNonQuery(sqlInsert, false))
                     {
                         LoadDGV(dgv, txt_barcode.Text, true);
@@ -154,31 +159,45 @@ namespace a90Check
         string sqlExport;
         private void btnExport_Click(object sender, EventArgs e)
         {
-            TfSQL tf = new TfSQL();
-            string sqlExport = "select a90_barcode Barcode, a90_status status, a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' and a90_datetime < '" + dtpTo.Value.ToString() + "' order by a90_datetime desc";
-            DataTable dt = new DataTable();
+            //TfSQL tf = new TfSQL();
+            //string sqlExport = "select a90_barcode Barcode, a90_status status, a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' and a90_datetime < '" + dtpTo.Value.ToString() + "' order by a90_datetime desc";
+            //DataTable dt = new DataTable();
 
-            tf.sqlDataAdapterFillDatatable(sqlExport, ref dt);
+            //tf.sqlDataAdapterFillDatatable(sqlExport, ref dt);
+            if(dtdata != null)
+            {
+                ExcelClass ex = new ExcelClass();
+                ex.ExportToExcel(dtdata);
 
-            ExcelClass ex = new ExcelClass();
-            ex.ExportToExcel(dt);
+            }
         }
 
         private void txtTimer_KeyPress(object sender, KeyPressEventArgs e)
         {
 
         }
-
+        public DataTable dtdata;
         private void btnView_Click(object sender, EventArgs e)
         {
             TfSQL tf = new TfSQL();
             string sqlExport = "select row_number() over(order by a90_datetime desc) stt, a90_model Model, a90_line line, a90_barcode Barcode, a90_status status, a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' and a90_datetime < '" + dtpTo.Value.ToString() +  "' order by a90_datetime desc";
-            DataTable dt = new DataTable();
+            dtdata = new DataTable();
 
-            tf.sqlDataAdapterFillDatatable(sqlExport, ref dt);
-            dgvData.DataSource = dt;
+            tf.sqlDataAdapterFillDatatable(sqlExport, ref dtdata);
+            dgvData.DataSource = dtdata;
             dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvData.Columns["stt"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            if (dgvData.RowCount > 0)
+            {
+                for (int i = 0; i < dgvData.RowCount; i++)
+                {
+                    if (dgvData.Rows[i].Cells["status"].Value.ToString() == "NG")
+                    {
+                        dgvData.Rows[i].Cells["status"].Style.BackColor = Color.Red;
+                    }
+                }
+            }
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
@@ -203,7 +222,7 @@ namespace a90Check
         public void LoadData()
         {
             TfSQL tf = new TfSQL();
-            string sqlExport = "select row_number() over(order by a90_datetime desc) stt, a90_model Model, a90_line line, a90_barcode Barcode, a90_status status, a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + DateTime.Now.ToShortDateString() + " 06:00:00' order by a90_datetime desc";
+            string sqlExport = "select row_number() over(order by a90_datetime desc) stt, a90_model Model, a90_line line, a90_barcode Barcode, a90_status status, a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' order by a90_datetime desc";
             DataTable dt = new DataTable();
 
             tf.sqlDataAdapterFillDatatable(sqlExport, ref dt);
@@ -245,6 +264,82 @@ namespace a90Check
                 else chk.Checked = false;
             }
             else login = false;
+        }
+
+        private void cmbModel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbLine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadInfo();
+        }
+        public void LoadInfo()
+        {
+            if (!Directory.Exists(@"C:\A90")) { Directory.CreateDirectory(@"C:\A90"); }
+            if (!File.Exists(@"C:\A90\info.csv")) { File.Create(@"C:\A90\info.csv"); }
+            var reader = new StreamReader(@"C:\A90\info.csv");
+            var s = reader.ReadLine();
+            string[] va = s.Split(',').ToArray();
+        }
+        public void LoadDGVNoise(DataGridView datagv, string barcode, bool order)
+        {
+            TfSQL tf = new TfSQL();
+            DataTable dt = new DataTable();
+            string sqlDGV = "select a90_model, a90_line, a90_barcode, a90_status, a90_datetime from t_checkpusha90main where a90_barcode = '" + barcode + "' ";
+
+            if (order) { sqlDGV += "order by a90_datetime desc limit 1"; }
+            else { sqlDGV += "order by a90_datetime desc"; }
+
+            tf.sqlDataAdapterFillDatatable(sqlDGV, ref dt);
+            datagv.DataSource = dt;
+
+            if (datagv.RowCount > 0)
+            {
+                datagv.Columns["a90_barcode"].HeaderText = "Barcode";
+                datagv.Columns["a90_status"].HeaderText = "Status";
+                datagv.Columns["a90_datetime"].HeaderText = "DateTime";
+            }
+            datagv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        public void UpdateStatusNoise(MouseEventArgs e)
+        {
+            //if (login)
+            //{
+            if (txtBarcodeNoise.Text.Trim() != "")
+            {
+                string status = "";
+                if (e.Button == MouseButtons.Right)
+                {
+                    status = "NG";
+                    btnStatusNoise.Text = "NG";
+                    btnStatusNoise.BackColor = Color.Red;
+                }
+                if (e.Button == MouseButtons.Left)
+                {
+                    status = "OK";
+                    btnStatusNoise.Text = "OK";
+                    btnStatusNoise.BackColor = Color.Green;
+                }
+                TfSQL tf = new TfSQL();
+                string sqlUpdate = "update t_checkpusha90main set a90_noise_status = '" + status + "' where a90_barcode = '" + txtBarcodeNoise.Text + "'";
+                if (tf.sqlExecuteNonQuery(sqlUpdate, false))
+                {
+                    //LoadDGV(dgv, txt_barcode.Text, true);
+                    txtBarcodeNoise.Text = null;
+                    txtBarcodeNoise.SelectNextControl(txtBarcodeNoise, true, false, true, true);
+                    timerNoise.Interval = int.Parse(txtTimerNoise.Text) * 1000;
+                    timerNoise.Enabled = true;
+                }
+                else dgvNoise.DataSource = null;
+            }
+            else return;
+            //}
+        }
+        private void tabNoise_MouseClick(object sender, MouseEventArgs e)
+        {
+            UpdateStatusNoise(e);
         }
     }
 }
