@@ -41,3 +41,5 @@ D:\NCVP_GIT\blynkARD\A90Check\a90Check\a90Check\obj\Debug\a90Check.csproj.Genera
 D:\NCVP_GIT\blynkARD\A90Check\a90Check\a90Check\obj\Debug\a90Check.TrustInfo.xml
 D:\NCVP_GIT\blynkARD\A90Check\a90Check\a90Check\obj\Debug\a90Check.exe.manifest
 D:\NCVP_GIT\blynkARD\A90Check\a90Check\a90Check\obj\Debug\a90Check.application
+D:\GIT\blynkARD\A90Check\a90Check\a90Check\obj\Debug\a90Check.Pass.resources
+D:\GIT\blynkARD\A90Check\a90Check\a90Check\bin\Debug\Npgsql.dll
