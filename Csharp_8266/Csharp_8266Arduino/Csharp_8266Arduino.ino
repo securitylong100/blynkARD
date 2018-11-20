@@ -1,9 +1,9 @@
 int val = 8888;
 int tranfer;
-
+int button = 9;
 int led = LED_BUILTIN;
-int output = 9;
 void setup() {
+  pinMode(button, INPUT);
   pinMode(led, OUTPUT);
   Serial.begin(9600);
 }
@@ -18,14 +18,26 @@ void loop() {
   {
     digitalWrite(led, LOW);
     tranfer = '00';
-    digitalWrite(output, LOW);
-
+    Serial.println ("LED Dang Tat ");
+    delay (1000);
   } else if (val == '1')
   {
     digitalWrite(led, HIGH);
     tranfer = '11';
-    digitalWrite(output, HIGH);
+    Serial.println ("LED Dang Sáng ");
+    delay (1000);
   }
- // Serial.write(tranfer);
+  if (digitalRead(button) == HIGH)
+  {
+    digitalWrite(led, HIGH);
+    Serial.println ("Button làm sáng");
+    delay (1000);
+  }
+  else { // ngược lại
+    digitalWrite(led, LOW);
+    Serial.println ("Button làm tắt ");
+    delay (1000);
+  }
+  // Serial.write(tranfer);
   //delay (1000);
 }

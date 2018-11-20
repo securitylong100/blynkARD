@@ -7,3 +7,6 @@ D:\GIT\Csharp_8266\Csharp_8266\bin\Debug\Csharp_8266.exe
 D:\GIT\Csharp_8266\Csharp_8266\bin\Debug\Csharp_8266.pdb
 D:\GIT\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.exe
 D:\GIT\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.pdb
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\bin\Debug\Csharp_8266.exe.config
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.exe
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.pdb
