@@ -118,6 +118,7 @@ namespace a90Check
         {
             AddStatus(e);
         }
+      
         public void AddStatus(MouseEventArgs e)
         {
             if (login)
@@ -316,6 +317,10 @@ namespace a90Check
         {
             logincheck(chk_NC);
         }
+        private void chk_OQC_Click(object sender, EventArgs e)
+        {
+            logincheck(chk_OQC);
+        }
         void logincheck(CheckBox checkbox)
         {
             if (checkbox.Checked)
@@ -413,5 +418,6 @@ namespace a90Check
             timerNoise.Enabled = false;
         }
 
+      
     }
 }
