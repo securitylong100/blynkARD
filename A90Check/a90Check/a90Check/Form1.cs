@@ -247,6 +247,30 @@ namespace a90Check
         private void timerData_Tick(object sender, EventArgs e)
         {
             LoadData();
+            timeleft();
+        }
+        void timeleft()
+        {
+            if (dgvData.RowCount > 3 && txt_plan.Text != "")
+            {
+                DateTime b = DateTime.Parse(dgvData.Rows[0].Cells["DateTime"].Value.ToString());
+                DateTime a = DateTime.Parse(dgvData.Rows[dgvData.RowCount - 1].Cells["DateTime"].Value.ToString());
+                TimeSpan c = (b - a);
+                string[] time = c.ToString().Split(':').ToArray();
+                int hour = int.Parse(time[0].Substring(time[0].Length - 2, 2));
+                int minues = int.Parse(time[1]);
+                int second = int.Parse(time[2]);
+                string[] stringday = c.ToString().Split('.').ToArray();
+                int day = int.Parse(stringday[0]);
+                int totalsecond = day * 24 * 60 * 60 + hour * 60 * 60 + minues * 60 + second;
+                int pcssecond = totalsecond / (dgvData.RowCount);
+                int needtimesecond =( int.Parse(txt_plan.Text)-(dgvData.RowCount)) * pcssecond;
+                if (needtimesecond < 0) { lbl_resulf.Text = "0s ~ " + 0 + " days " + 0 + " hours " + 0 + " minues "; return; };
+                int dayout = needtimesecond / (24 * 60 * 60);
+                int hourout = (needtimesecond - (dayout * 24 * 60 * 60)) / (60 * 60);
+                int minuesout = (needtimesecond - (dayout * 24 * 60 * 60) - (hourout * 60 * 60)) / 60;
+                lbl_resulf.Text = needtimesecond.ToString() + "s ~ " + dayout + " days " + hourout + " hours " + minuesout + " minues ";
+            }
         }
         public void LoadData()
         {
@@ -388,5 +412,6 @@ namespace a90Check
             dgvNoise.DataSource = null;
             timerNoise.Enabled = false;
         }
+
     }
 }

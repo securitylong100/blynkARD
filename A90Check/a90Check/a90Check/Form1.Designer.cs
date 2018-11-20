@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lbl_line = new System.Windows.Forms.Label();
@@ -56,6 +56,9 @@
             this.btnStatusNoise = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btn_noisestatus = new System.Windows.Forms.Button();
             this.dgvCheck = new System.Windows.Forms.DataGridView();
             this.btn_check = new System.Windows.Forms.Button();
             this.btn_thurststatus = new System.Windows.Forms.Button();
@@ -74,9 +77,9 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerData = new System.Windows.Forms.Timer(this.components);
             this.timerNoise = new System.Windows.Forms.Timer(this.components);
-            this.btn_noisestatus = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.txt_plan = new System.Windows.Forms.TextBox();
+            this.lbl_resulf = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -120,7 +123,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1268, 454);
+            this.tabPage1.Size = new System.Drawing.Size(1268, 541);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Thrust  Test";
             this.tabPage1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabPage1_MouseClick);
@@ -139,7 +142,7 @@
             // 
             this.lbl_model.AutoSize = true;
             this.lbl_model.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.lbl_model.Location = new System.Drawing.Point(8, 37);
+            this.lbl_model.Location = new System.Drawing.Point(8, 35);
             this.lbl_model.Name = "lbl_model";
             this.lbl_model.Size = new System.Drawing.Size(70, 25);
             this.lbl_model.TabIndex = 14;
@@ -174,8 +177,8 @@
             this.dgv.Location = new System.Drawing.Point(0, 376);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgv.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgv.RowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dgv.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgv.Size = new System.Drawing.Size(1268, 78);
             this.dgv.TabIndex = 1;
@@ -218,6 +221,7 @@
             // 
             this.txt_barcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_barcode.Location = new System.Drawing.Point(339, 33);
+            this.txt_barcode.MaxLength = 8;
             this.txt_barcode.Name = "txt_barcode";
             this.txt_barcode.Size = new System.Drawing.Size(188, 29);
             this.txt_barcode.TabIndex = 8;
@@ -259,7 +263,7 @@
             this.tabNoise.Location = new System.Drawing.Point(4, 29);
             this.tabNoise.Name = "tabNoise";
             this.tabNoise.Padding = new System.Windows.Forms.Padding(3);
-            this.tabNoise.Size = new System.Drawing.Size(1268, 454);
+            this.tabNoise.Size = new System.Drawing.Size(1268, 541);
             this.tabNoise.TabIndex = 3;
             this.tabNoise.Text = "Noise Check";
             this.tabNoise.UseVisualStyleBackColor = true;
@@ -286,8 +290,8 @@
             this.dgvNoise.Location = new System.Drawing.Point(0, 376);
             this.dgvNoise.Name = "dgvNoise";
             this.dgvNoise.RowHeadersVisible = false;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvNoise.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvNoise.RowsDefaultCellStyle = dataGridViewCellStyle19;
             this.dgvNoise.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvNoise.Size = new System.Drawing.Size(1268, 78);
             this.dgvNoise.TabIndex = 16;
@@ -315,6 +319,7 @@
             // 
             this.txtBarcodeNoise.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBarcodeNoise.Location = new System.Drawing.Point(24, 38);
+            this.txtBarcodeNoise.MaxLength = 8;
             this.txtBarcodeNoise.Name = "txtBarcodeNoise";
             this.txtBarcodeNoise.Size = new System.Drawing.Size(188, 29);
             this.txtBarcodeNoise.TabIndex = 13;
@@ -361,6 +366,39 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Shipping Lot Check";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(879, 99);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(119, 24);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "Noise  Status";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(191, 99);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(118, 24);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Thurst Status";
+            // 
+            // btn_noisestatus
+            // 
+            this.btn_noisestatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_noisestatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_noisestatus.Location = new System.Drawing.Point(688, 126);
+            this.btn_noisestatus.Name = "btn_noisestatus";
+            this.btn_noisestatus.Size = new System.Drawing.Size(517, 308);
+            this.btn_noisestatus.TabIndex = 8;
+            this.btn_noisestatus.Text = "Status";
+            this.btn_noisestatus.UseVisualStyleBackColor = true;
+            // 
             // dgvCheck
             // 
             this.dgvCheck.AllowUserToAddRows = false;
@@ -370,8 +408,8 @@
             this.dgvCheck.Location = new System.Drawing.Point(0, 463);
             this.dgvCheck.Name = "dgvCheck";
             this.dgvCheck.RowHeadersVisible = false;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCheck.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCheck.RowsDefaultCellStyle = dataGridViewCellStyle20;
             this.dgvCheck.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvCheck.Size = new System.Drawing.Size(1268, 78);
             this.dgvCheck.TabIndex = 7;
@@ -403,6 +441,7 @@
             // 
             this.txt_barcodeCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_barcodeCheck.Location = new System.Drawing.Point(98, 10);
+            this.txt_barcodeCheck.MaxLength = 8;
             this.txt_barcodeCheck.Name = "txt_barcodeCheck";
             this.txt_barcodeCheck.Size = new System.Drawing.Size(185, 29);
             this.txt_barcodeCheck.TabIndex = 4;
@@ -419,6 +458,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.lbl_resulf);
+            this.tabPage3.Controls.Add(this.txt_plan);
             this.tabPage3.Controls.Add(this.label5);
             this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Controls.Add(this.btnLoad);
@@ -470,20 +512,20 @@
             this.dgvData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvData.ColumnHeadersHeight = 28;
             this.dgvData.Location = new System.Drawing.Point(0, 44);
             this.dgvData.Name = "dgvData";
             this.dgvData.RowHeadersVisible = false;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvData.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvData.RowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvData.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvData.Size = new System.Drawing.Size(1268, 497);
             this.dgvData.TabIndex = 8;
@@ -548,38 +590,30 @@
             // 
             this.timerNoise.Tick += new System.EventHandler(this.timerNoise_Tick);
             // 
-            // btn_noisestatus
+            // txt_plan
             // 
-            this.btn_noisestatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_noisestatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_noisestatus.Location = new System.Drawing.Point(688, 126);
-            this.btn_noisestatus.Name = "btn_noisestatus";
-            this.btn_noisestatus.Size = new System.Drawing.Size(517, 308);
-            this.btn_noisestatus.TabIndex = 8;
-            this.btn_noisestatus.Text = "Status";
-            this.btn_noisestatus.UseVisualStyleBackColor = true;
+            this.txt_plan.Location = new System.Drawing.Point(782, 9);
+            this.txt_plan.Name = "txt_plan";
+            this.txt_plan.Size = new System.Drawing.Size(100, 26);
+            this.txt_plan.TabIndex = 12;
             // 
-            // label11
+            // lbl_resulf
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(191, 99);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(118, 24);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "Thurst Status";
+            this.lbl_resulf.AutoSize = true;
+            this.lbl_resulf.Location = new System.Drawing.Point(898, 13);
+            this.lbl_resulf.Name = "lbl_resulf";
+            this.lbl_resulf.Size = new System.Drawing.Size(69, 20);
+            this.lbl_resulf.TabIndex = 13;
+            this.lbl_resulf.Text = "Time left";
             // 
-            // label12
+            // label13
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(879, 99);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(119, 24);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "Noise  Status";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(695, 13);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(81, 20);
+            this.label13.TabIndex = 14;
+            this.label13.Text = "Input Plan";
             // 
             // Form1
             // 
@@ -653,6 +687,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btn_noisestatus;
+        private System.Windows.Forms.Label lbl_resulf;
+        private System.Windows.Forms.TextBox txt_plan;
+        private System.Windows.Forms.Label label13;
     }
 }
 
