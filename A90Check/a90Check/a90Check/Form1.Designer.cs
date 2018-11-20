@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lbl_line = new System.Windows.Forms.Label();
@@ -80,6 +81,17 @@
             this.txt_plan = new System.Windows.Forms.TextBox();
             this.lbl_resulf = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.tabOQC = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txt_timerOQC = new System.Windows.Forms.TextBox();
+            this.txt_barcodeOQC = new System.Windows.Forms.TextBox();
+            this.btn_statusOQC = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.chk_OQC = new System.Windows.Forms.CheckBox();
+            this.dgv_OQC = new System.Windows.Forms.DataGridView();
+            this.timerOQC = new System.Windows.Forms.Timer(this.components);
+            this.txt_dataOQC = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -89,12 +101,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheck)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.tabOQC.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_OQC)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabNoise);
+            this.tabControl1.Controls.Add(this.tabOQC);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -171,16 +186,15 @@
             // dgv
             // 
             this.dgv.AllowUserToAddRows = false;
-            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.ColumnHeadersHeight = 28;
-            this.dgv.Location = new System.Drawing.Point(0, 376);
+            this.dgv.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgv.Location = new System.Drawing.Point(3, 460);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgv.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgv.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgv.Size = new System.Drawing.Size(1268, 78);
+            this.dgv.Size = new System.Drawing.Size(1262, 78);
             this.dgv.TabIndex = 1;
             // 
             // chk
@@ -284,16 +298,15 @@
             // dgvNoise
             // 
             this.dgvNoise.AllowUserToAddRows = false;
-            this.dgvNoise.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvNoise.ColumnHeadersHeight = 28;
-            this.dgvNoise.Location = new System.Drawing.Point(0, 376);
+            this.dgvNoise.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvNoise.Location = new System.Drawing.Point(3, 460);
             this.dgvNoise.Name = "dgvNoise";
             this.dgvNoise.RowHeadersVisible = false;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvNoise.RowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvNoise.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvNoise.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvNoise.Size = new System.Drawing.Size(1268, 78);
+            this.dgvNoise.Size = new System.Drawing.Size(1262, 78);
             this.dgvNoise.TabIndex = 16;
             // 
             // label9
@@ -408,8 +421,8 @@
             this.dgvCheck.Location = new System.Drawing.Point(0, 463);
             this.dgvCheck.Name = "dgvCheck";
             this.dgvCheck.RowHeadersVisible = false;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvCheck.RowsDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvCheck.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCheck.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvCheck.Size = new System.Drawing.Size(1268, 78);
             this.dgvCheck.TabIndex = 7;
@@ -512,20 +525,20 @@
             this.dgvData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvData.ColumnHeadersHeight = 28;
             this.dgvData.Location = new System.Drawing.Point(0, 44);
             this.dgvData.Name = "dgvData";
             this.dgvData.RowHeadersVisible = false;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvData.RowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvData.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvData.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvData.Size = new System.Drawing.Size(1268, 497);
             this.dgvData.TabIndex = 8;
@@ -615,6 +628,119 @@
             this.label13.TabIndex = 14;
             this.label13.Text = "Input Plan";
             // 
+            // tabOQC
+            // 
+            this.tabOQC.Controls.Add(this.txt_dataOQC);
+            this.tabOQC.Controls.Add(this.label16);
+            this.tabOQC.Controls.Add(this.dgv_OQC);
+            this.tabOQC.Controls.Add(this.chk_OQC);
+            this.tabOQC.Controls.Add(this.label14);
+            this.tabOQC.Controls.Add(this.txt_timerOQC);
+            this.tabOQC.Controls.Add(this.txt_barcodeOQC);
+            this.tabOQC.Controls.Add(this.btn_statusOQC);
+            this.tabOQC.Controls.Add(this.label15);
+            this.tabOQC.Location = new System.Drawing.Point(4, 29);
+            this.tabOQC.Name = "tabOQC";
+            this.tabOQC.Size = new System.Drawing.Size(1268, 541);
+            this.tabOQC.TabIndex = 4;
+            this.tabOQC.Text = "OQC Check";
+            this.tabOQC.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(518, 13);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(64, 24);
+            this.label14.TabIndex = 20;
+            this.label14.Text = "Timer:";
+            // 
+            // txt_timerOQC
+            // 
+            this.txt_timerOQC.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_timerOQC.Location = new System.Drawing.Point(522, 40);
+            this.txt_timerOQC.Name = "txt_timerOQC";
+            this.txt_timerOQC.Size = new System.Drawing.Size(133, 29);
+            this.txt_timerOQC.TabIndex = 19;
+            this.txt_timerOQC.Text = "3";
+            // 
+            // txt_barcodeOQC
+            // 
+            this.txt_barcodeOQC.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_barcodeOQC.Location = new System.Drawing.Point(22, 40);
+            this.txt_barcodeOQC.MaxLength = 8;
+            this.txt_barcodeOQC.Name = "txt_barcodeOQC";
+            this.txt_barcodeOQC.Size = new System.Drawing.Size(188, 29);
+            this.txt_barcodeOQC.TabIndex = 18;
+            // 
+            // btn_statusOQC
+            // 
+            this.btn_statusOQC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_statusOQC.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_statusOQC.Location = new System.Drawing.Point(84, 105);
+            this.btn_statusOQC.Name = "btn_statusOQC";
+            this.btn_statusOQC.Size = new System.Drawing.Size(1080, 249);
+            this.btn_statusOQC.TabIndex = 17;
+            this.btn_statusOQC.Text = "Status";
+            this.btn_statusOQC.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(19, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(86, 24);
+            this.label15.TabIndex = 16;
+            this.label15.Text = "Barcode:";
+            // 
+            // chk_OQC
+            // 
+            this.chk_OQC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chk_OQC.AutoSize = true;
+            this.chk_OQC.Location = new System.Drawing.Point(1184, 40);
+            this.chk_OQC.Name = "chk_OQC";
+            this.chk_OQC.Size = new System.Drawing.Size(67, 24);
+            this.chk_OQC.TabIndex = 21;
+            this.chk_OQC.Text = "Login";
+            this.chk_OQC.UseVisualStyleBackColor = true;
+            // 
+            // dgv_OQC
+            // 
+            this.dgv_OQC.AllowUserToAddRows = false;
+            this.dgv_OQC.ColumnHeadersHeight = 28;
+            this.dgv_OQC.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgv_OQC.Location = new System.Drawing.Point(0, 463);
+            this.dgv_OQC.Name = "dgv_OQC";
+            this.dgv_OQC.RowHeadersVisible = false;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgv_OQC.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv_OQC.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgv_OQC.Size = new System.Drawing.Size(1268, 78);
+            this.dgv_OQC.TabIndex = 22;
+            // 
+            // txt_dataOQC
+            // 
+            this.txt_dataOQC.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_dataOQC.Location = new System.Drawing.Point(259, 40);
+            this.txt_dataOQC.MaxLength = 16;
+            this.txt_dataOQC.Name = "txt_dataOQC";
+            this.txt_dataOQC.Size = new System.Drawing.Size(188, 29);
+            this.txt_dataOQC.TabIndex = 24;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(256, 13);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(52, 24);
+            this.label16.TabIndex = 23;
+            this.label16.Text = "Data:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -638,6 +764,9 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.tabOQC.ResumeLayout(false);
+            this.tabOQC.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_OQC)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -690,6 +819,17 @@
         private System.Windows.Forms.Label lbl_resulf;
         private System.Windows.Forms.TextBox txt_plan;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TabPage tabOQC;
+        private System.Windows.Forms.DataGridView dgv_OQC;
+        private System.Windows.Forms.CheckBox chk_OQC;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txt_timerOQC;
+        private System.Windows.Forms.TextBox txt_barcodeOQC;
+        private System.Windows.Forms.Button btn_statusOQC;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Timer timerOQC;
+        private System.Windows.Forms.TextBox txt_dataOQC;
+        private System.Windows.Forms.Label label16;
     }
 }
 

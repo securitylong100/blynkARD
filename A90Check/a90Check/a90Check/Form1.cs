@@ -205,7 +205,7 @@ namespace a90Check
         private void btnView_Click(object sender, EventArgs e)
         {
             TfSQL tf = new TfSQL();
-            string sqlExport = "select row_number() over(order by a90_datetime desc) stt, a90_model Model, a90_line line, a90_barcode Barcode, a90_status ThurstStatus, a90_noise_status as NoiseStatus ,a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' and a90_datetime < '" + dtpTo.Value.ToString() + "' order by a90_datetime desc";
+            string sqlExport = "select row_number() over(order by a90_datetime asc) stt, a90_model Model, a90_line line, a90_barcode Barcode, a90_status ThurstStatus, a90_noise_status as NoiseStatus ,a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' and a90_datetime < '" + dtpTo.Value.ToString() + "' order by a90_datetime desc";
             dtdata = new DataTable();
 
             tf.sqlDataAdapterFillDatatable(sqlExport, ref dtdata);
@@ -275,7 +275,7 @@ namespace a90Check
         public void LoadData()
         {
             TfSQL tf = new TfSQL();
-            string sqlExport = "select row_number() over(order by a90_datetime desc) stt, a90_model Model, a90_line line, a90_barcode Barcode, a90_status ThurstStatus,a90_noise_status as NoiseStatus, a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' order by a90_datetime desc";
+            string sqlExport = "select row_number() over(order by a90_datetime asc) stt, a90_model Model, a90_line line, a90_barcode Barcode, a90_status ThurstStatus,a90_noise_status as NoiseStatus, a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' order by a90_datetime desc";
             DataTable dt = new DataTable();
 
             tf.sqlDataAdapterFillDatatable(sqlExport, ref dt);
