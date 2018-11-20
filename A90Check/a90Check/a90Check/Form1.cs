@@ -20,13 +20,44 @@ namespace a90Check
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadInfo();
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+
+                Version deploy = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+
+                StringBuilder version = new StringBuilder();
+                version.Append("A90 ");
+                //version.Append(applicationName + "_");
+                version.Append(deploy.Major);
+                version.Append(".");
+                version.Append(deploy.Minor);
+                version.Append(".");
+                version.Append(deploy.Build);
+                version.Append(".");
+                version.Append(deploy.Revision);
+
+                Text = version.ToString();
+            }
         }
         public void LoadInfo()
         {
+            //Model : "GA1" Line : "L01"
             if (!Directory.Exists(@"C:\GA1")) { Directory.CreateDirectory(@"C:\GA1"); }
             if (!File.Exists(@"C:\GA1\info.txt")) { File.Create(@"C:\GA1\info.txt"); }
+
             var reader = new StreamReader(@"C:\GA1\info.txt");
-            var s = reader.ReadLine();
+            string s = reader.ReadLine();
+            if (s == null)
+            {
+                reader.Close();
+                StreamWriter sw = new StreamWriter(@"C:\GA1\info.txt");
+                sw.WriteLine("Model : \"GA1\" Line : \"L01\"");
+                sw.Flush();
+                sw.Close();
+                reader = new StreamReader(@"C:\GA1\info.txt");
+                s = reader.ReadLine();
+            }
+            //var s = reader.ReadLine();
             string[] va = s.Split('"').ToArray();
             lbl_line.Text = va[3];
             lbl_model.Text = va[1];
@@ -37,12 +68,15 @@ namespace a90Check
         {
             if (txt_barcodeCheck.Text != "")
             {
-                LoadDGV(dgvCheck, txt_barcodeCheck.Text, false);
+                LoadDGVOQC(dgvCheck, txt_barcodeCheck.Text, false);
                 TfSQL con = new TfSQL();
                 string sql_thurst = "select a90_status from t_checkpusha90main where  a90_barcode = '" + txt_barcodeCheck.Text + "' order by a90_id desc limit 1";
                 string sql_noise = "select a90_noise_status from t_checkpusha90main where  a90_barcode = '" + txt_barcodeCheck.Text + "' order by a90_id desc limit 1";
+                string sql_oqc = "select a90_oqc_status from t_checkpusha90main where  a90_barcode = '" + txt_barcodeCheck.Text + "' order by a90_id desc limit 1";
                 string thurst_status = con.sqlExecuteScalarString(sql_thurst);
                 string noise_status = con.sqlExecuteScalarString(sql_noise);
+                string oqc_status = con.sqlExecuteScalarString(sql_oqc);
+
                 if (thurst_status == "OK")
                 {
                     btn_thurststatus.Text = "OK";
@@ -67,14 +101,32 @@ namespace a90Check
                     btn_noisestatus.BackColor = Color.Red;
                     txt_barcodeCheck.Text = "";
                 }
+                if (oqc_status == "OK")
+                {
+                    lblOQC.Text = "Checked";
+                    txt_barcodeCheck.Text = "";
+                }
+                else if (oqc_status == "NG")
+                {
+                    lblOQC.Text = "Checked";
+                    txt_barcodeCheck.Text = "";
+                }
+                if (oqc_status == "")
+                {
+                    lblOQC.Text = "Not Checked";
+                    txt_barcodeCheck.Text = "";
+                    //192, 192, 255
+                }
                 if (thurst_status == "")
                 {
                     btn_thurststatus.Text = "WAITING";
+                    btn_thurststatus.BackColor = SystemColors.Control;
                     txt_barcodeCheck.Text = "";
                 }
                 if (noise_status == "")
                 {
                     btn_noisestatus.Text = "WAITING";
+                    btn_noisestatus.BackColor = SystemColors.Control;
                     txt_barcodeCheck.Text = "";
                 }
             }
@@ -171,6 +223,7 @@ namespace a90Check
         {
             timer1.Enabled = false;
             timerData.Enabled = false;
+            timerOQC.Enabled = false;
         }
 
         private void txt_barcode_MouseClick(object sender, MouseEventArgs e)
@@ -206,7 +259,7 @@ namespace a90Check
         private void btnView_Click(object sender, EventArgs e)
         {
             TfSQL tf = new TfSQL();
-            string sqlExport = "select row_number() over(order by a90_datetime asc) stt, a90_model Model, a90_line line, a90_barcode Barcode, a90_status ThurstStatus, a90_noise_status as NoiseStatus ,a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' and a90_datetime < '" + dtpTo.Value.ToString() + "' order by a90_datetime desc";
+            string sqlExport = "select row_number() over(order by a90_datetime asc) stt, a90_model Model, a90_line line, a90_barcode Barcode, a90_status ThurstStatus, a90_noise_status as NoiseStatus , a90_oqc_status oqcStatus, a90_oqc_data oqcData ,a90_datetime DateTime from t_checkpusha90main where a90_datetime > '" + dtpFrom.Value.ToString() + "' and a90_datetime < '" + dtpTo.Value.ToString() + "' order by a90_datetime desc";
             dtdata = new DataTable();
 
             tf.sqlDataAdapterFillDatatable(sqlExport, ref dtdata);
@@ -417,7 +470,87 @@ namespace a90Check
             dgvNoise.DataSource = null;
             timerNoise.Enabled = false;
         }
+        public void LoadDGVOQC(DataGridView datagv, string barcode, bool order)
+        {
+            TfSQL tf = new TfSQL();
+            DataTable dt = new DataTable();
+            string sqlDGV = "select a90_barcode, a90_status, a90_noise_status,a90_oqc_status, a90_oqc_data, a90_datetime  from t_checkpusha90main where a90_barcode = '" + barcode + "' ";
 
-      
+            if (order) { sqlDGV += "order by a90_datetime desc limit 1"; }
+            else { sqlDGV += "order by a90_datetime desc"; }
+
+            tf.sqlDataAdapterFillDatatable(sqlDGV, ref dt);
+            datagv.DataSource = dt;
+
+            if (datagv.RowCount > 0)
+            {
+                datagv.Columns["a90_barcode"].HeaderText = "Barcode";
+                datagv.Columns["a90_status"].HeaderText = "Thurst Status ";
+                datagv.Columns["a90_datetime"].HeaderText = "DateTime";
+                datagv.Columns["a90_noise_status"].HeaderText = "Noise Status";
+                datagv.Columns["a90_oqc_status"].HeaderText = "OQC Status";
+                datagv.Columns["a90_oqc_data"].HeaderText = "OQC Data";
+            }
+            datagv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        public void UpdateStatusOQC(MouseEventArgs e)
+        {
+            if (login)
+            {
+                if (txt_barcodeOQC.Text.Trim() != "" || txt_dataOQC.Text.Trim() != "")
+                {
+                    TfSQL tf = new TfSQL();
+                    string sqlcheckbarcode = "select count(*) from t_checkpusha90main where a90_barcode = '" + txt_barcodeOQC.Text + "'";
+                    int checkbarcode = int.Parse(tf.sqlExecuteScalarString(sqlcheckbarcode));
+                    if (checkbarcode > 0)
+                    {
+                        string status = "";
+                        if (e.Button == MouseButtons.Right)
+                        {
+                            status = "NG";
+                            btn_statusOQC.Text = "NG";
+                            btn_statusOQC.BackColor = Color.Red;
+                        }
+                        if (e.Button == MouseButtons.Left)
+                        {
+                            status = "OK";
+                            btn_statusOQC.Text = "OK";
+                            btn_statusOQC.BackColor = Color.Green;
+                        }
+                        string sqlUpdate = "update t_checkpusha90main set a90_oqc_status = '" + status + "', a90_oqc_data = '" + txt_dataOQC.Text + "' where a90_barcode = '" + txt_barcodeOQC.Text + "'";
+                        if (tf.sqlExecuteNonQuery(sqlUpdate, false))
+                        {
+                            LoadDGVOQC(dgv_OQC, txt_barcodeOQC.Text, true);
+                            txt_barcodeOQC.Text = null;
+                            txt_barcodeOQC.SelectNextControl(txt_barcodeOQC, true, false, true, true); //trả lại con chỏ vô textbox
+                            timerOQC.Interval = int.Parse(txt_timerOQC.Text) * 1000;
+                            timerOQC.Enabled = true;
+                        }
+                        else dgv_OQC.DataSource = null;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Barocde No is Null <Không có Mã barcode này >", "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                    }
+                }
+                else return;
+            }
+            else
+            {
+                MessageBox.Show("Not Login <Chưa đăng nhập> ", "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+        }
+        private void tabOQC_MouseClick(object sender, MouseEventArgs e)
+        {
+            UpdateStatusOQC(e);
+        }
+
+        private void timerOQC_Tick(object sender, EventArgs e)
+        {
+            btn_statusOQC.Text = "Waiting";
+            btn_statusOQC.BackColor = SystemColors.Control;
+            dgv_OQC.DataSource = null;
+            timerOQC.Enabled = false;
+        }
     }
 }
