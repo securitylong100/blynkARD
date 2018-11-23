@@ -35,7 +35,7 @@
             this.btn_led = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.serialcom = new System.IO.Ports.SerialPort(this.components);
-            this.lbl_vaulecheck = new System.Windows.Forms.Label();
+            this.btn_tcpip = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -88,22 +88,22 @@
             // 
             this.serialcom.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialcom_DataReceived_1);
             // 
-            // lbl_vaulecheck
+            // btn_tcpip
             // 
-            this.lbl_vaulecheck.AutoSize = true;
-            this.lbl_vaulecheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_vaulecheck.Location = new System.Drawing.Point(189, 143);
-            this.lbl_vaulecheck.Name = "lbl_vaulecheck";
-            this.lbl_vaulecheck.Size = new System.Drawing.Size(87, 16);
-            this.lbl_vaulecheck.TabIndex = 5;
-            this.lbl_vaulecheck.Text = "Vaule  Check";
+            this.btn_tcpip.Location = new System.Drawing.Point(192, 139);
+            this.btn_tcpip.Name = "btn_tcpip";
+            this.btn_tcpip.Size = new System.Drawing.Size(127, 23);
+            this.btn_tcpip.TabIndex = 5;
+            this.btn_tcpip.Text = "TCP/IP wifi==>> ";
+            this.btn_tcpip.UseVisualStyleBackColor = true;
+            this.btn_tcpip.Click += new System.EventHandler(this.btn_tcpip_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 189);
-            this.Controls.Add(this.lbl_vaulecheck);
+            this.Controls.Add(this.btn_tcpip);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_led);
             this.Controls.Add(this.btn_ketnoi);
@@ -125,7 +125,7 @@
         private System.Windows.Forms.Button btn_led;
         private System.Windows.Forms.Label label2;
         private System.IO.Ports.SerialPort serialcom;
-        private System.Windows.Forms.Label lbl_vaulecheck;
+        private System.Windows.Forms.Button btn_tcpip;
     }
 }
 

@@ -57,17 +57,17 @@ void loop() {
   }
 
   if (count == 0) {
-    url = "/api/led/read_all.php?id=1";
+    url = "/thuy/api/led/read_all.php?id=1";
     count = count + 1;
     Serial.println("Here1");
   }
   else if (count == 1) {
-    url = "/api/led/read_all.php?id=2";
+    url = "/thuy/api/led/read_all.php?id=2";
     count = count + 1;
     Serial.println("Here2");
   }
   else if (count == 2) {
-    url = "/api/led/read_all.php?id=3";
+    url = "/thuy/api/led/read_all.php?id=3";
     count = count + 1;
     Serial.println("Here3");
   }

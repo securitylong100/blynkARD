@@ -10,3 +10,10 @@ D:\GIT\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.pdb
 D:\GIT\blynkARD\Csharp_8266\Csharp_8266\bin\Debug\Csharp_8266.exe.config
 D:\GIT\blynkARD\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.exe
 D:\GIT\blynkARD\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.pdb
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\bin\Debug\Csharp_8266.exe
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\bin\Debug\Csharp_8266.pdb
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.csprojResolveAssemblyReference.cache
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.Form1.resources
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.Properties.Resources.resources
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.csproj.GenerateResource.Cache
+D:\GIT\blynkARD\Csharp_8266\Csharp_8266\obj\Debug\Csharp_8266.Wifi_Form.resources

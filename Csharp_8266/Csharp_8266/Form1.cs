@@ -28,11 +28,11 @@ namespace Csharp_8266
         {
             if (btn_ketnoi.Text == "Đang Ngắt Kết Nối")
             {
-                if (!serialcom.IsOpen) // Nếu đối tượng serialPort1 chưa được mở , sau khi nhấn button 1 thỳ…
+                if (!serialcom.IsOpen) 
                 {
 
-                    serialcom.PortName = cmb_com.Text;//cổng serialPort1 = ComboBox mà bạn đang chọn
-                    serialcom.Open();// Mở cổng serialPort1
+                    serialcom.PortName = cmb_com.Text;
+                    serialcom.Open();
                     btn_ketnoi.Text = "Kết Nối";
                 }
             }
@@ -60,12 +60,22 @@ namespace Csharp_8266
             }
 
         }
+        string atam = "";
         private void serialcom_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
         {
-            Thread.Sleep(1000);
+             
+           
+           // Thread.Sleep(1000);
             serialcom.Encoding = Encoding.ASCII;
             content = serialcom.ReadExisting();
-          //  MessageBox.Show(content);
+            atam = content;
+        }
+
+        private void btn_tcpip_Click(object sender, EventArgs e)
+        {
+           // this.Close();
+            Wifi_Form wififrm = new Wifi_Form();            
+            wififrm.ShowDialog();
         }
     }
 }
