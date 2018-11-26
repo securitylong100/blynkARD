@@ -38,13 +38,15 @@ void loop() {
   {
     digitalWrite(led8, HIGH);
     digitalWrite(led, LOW);
-    Serial.write("on");
+    // Serial.write("on");
+    Serial.println("on");
     delay (200);
   }
   else { // ngược lại
     digitalWrite(led8, LOW);
     digitalWrite(led, HIGH);
-    Serial.write("off");
+    // Serial.write("off");
+    Serial.println("off");
     delay (200);
   }
 

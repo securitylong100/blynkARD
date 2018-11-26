@@ -2,6 +2,10 @@
 #include <SPI.h>
 #include <String.h>
 #include <SD.h>
+int button = 16; // là tx gắn d2
+int led8 = 0; //gan d8
+int led = LED_BUILTIN;
+
 //const char* ssid     = "iPhone";
 //const char* password = "longcoi12345";
 const char* ssid     = "TaoLaGa49";
@@ -9,20 +13,23 @@ const char* password = "longcoi123";
 const String ftp_account = "ftpin";
 const String ftp_passwords = "ftppass";
 const char *server = "192.168.145.7";
-String fileName, path;
+String fileName = "arduino.csv";
 String Folder_name = "459qb";
-const String int_fileName = "arduino.csv";
-const String int_path = "/NC01_";
+
 WiFiClient client;
 WiFiClient dclient;
-String data1 = "long", data2 = "long";
+String data1, data2 ;
 char outCount;
 char outBuf[128];
 boolean debug = true;
 boolean upload = true;
+String StatusLed;
 void setup()
 {
   Serial.begin(9600);
+  pinMode(button, INPUT);
+  pinMode(led, OUTPUT);
+  pinMode(led8, OUTPUT);
   delay(100);
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -205,8 +212,7 @@ byte doFTP(boolean upload) {
   if (debug) Serial.println(F("SPIFS closed"));
   return 1;
 }  // doFTP()
-
-void loop()
+void callFTP()
 {
   if (doFTP(upload))
   {
@@ -215,7 +221,28 @@ void loop()
   }
   else
   {
-    Serial.println(F("NGNGNGNGNGNGNGGNGN"));
+    Serial.println(F("FTP NOT CONNECTED."));
   }
-  delay(3000);
+}
+void loop()
+{
+  if (digitalRead(button) == HIGH)
+  {
+    digitalWrite(led8, HIGH);
+    digitalWrite(led, LOW);
+    Serial.println("on");
+    data1 = "Led dang ON";
+    callFTP();
+  }
+  else { // ngược lại
+    digitalWrite(led8, LOW);
+    digitalWrite(led, HIGH);
+    Serial.println("off");
+    data1 = "Led dang OFF";
+    callFTP();
+
+
+  }
+
+  delay(10000);
 }
