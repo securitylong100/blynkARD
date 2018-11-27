@@ -5,6 +5,7 @@
 int button = 16; // là tx gắn d2
 int led8 = 0; //gan d8
 int led = LED_BUILTIN;
+int lednetwork = 4;
 
 //const char* ssid     = "iPhone";
 //const char* password = "longcoi12345";
@@ -24,12 +25,14 @@ char outBuf[128];
 boolean debug = true;
 boolean upload = true;
 String StatusLed;
+long count = millis();
 void setup()
 {
   Serial.begin(9600);
   pinMode(button, INPUT);
   pinMode(led, OUTPUT);
   pinMode(led8, OUTPUT);
+  pinMode(lednetwork, OUTPUT);
   delay(100);
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -38,6 +41,9 @@ void setup()
   {
     delay(500);
     Serial.print(".");
+    digitalWrite(lednetwork, HIGH);
+    delay (500);
+    digitalWrite(lednetwork, LOW); 
   }
   Serial.println("");
   Serial.println("WiFi connected");
@@ -198,7 +204,12 @@ byte doFTP(boolean upload) {
 
   dclient.stop();
   Serial.println(F("Data disconnected"));
-
+ 
+    digitalWrite(lednetwork, HIGH);
+    delay (100);
+    digitalWrite(lednetwork, LOW);
+    delay (100);
+  
   if (!eRcv()) return 0;
 
   client.println(F("QUIT"));
@@ -226,23 +237,42 @@ void callFTP()
 }
 void loop()
 {
+   while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+    digitalWrite(lednetwork, HIGH);
+    delay (500);
+    digitalWrite(lednetwork, LOW); 
+  }
   if (digitalRead(button) == HIGH)
   {
     digitalWrite(led8, HIGH);
     digitalWrite(led, LOW);
     Serial.println("on");
     data1 = "Led dang ON";
-    callFTP();
+
+    if ((millis() - count) > 10000)
+    {
+      count = millis();
+      Serial.println("Xuất file");
+      callFTP();
+    }
+
   }
-  else { // ngược lại
+  else
+  {
     digitalWrite(led8, LOW);
     digitalWrite(led, HIGH);
     Serial.println("off");
     data1 = "Led dang OFF";
-    callFTP();
 
-
+    if ((millis() - count) > 10000)
+    {
+      count = millis();
+      Serial.println("Xuất file");
+      callFTP();
+    }
   }
 
-  delay(10000);
 }

@@ -2,14 +2,17 @@
 int val = 8888;
 int tranfer;
 bool check = false;
-int button = 16; // là tx Gắn D9
-int led8 = 0;
+int button = 16; // gan chân d2
+int led8 = 0; //ok gan chân 0
+int led0 = 11;
+
 int led = LED_BUILTIN;
 
 void setup() {
   pinMode(button, INPUT);
   pinMode(led, OUTPUT);
   pinMode(led8, OUTPUT);
+  pinMode(led0, OUTPUT);
   Serial.begin(9600);
 }
 void loop() {
@@ -22,6 +25,8 @@ void loop() {
   if (val == '0' )
   {
     digitalWrite(led8, HIGH);
+    digitalWrite(led, LOW);
+    delay(200);
     digitalWrite(led, LOW);
     tranfer = '00';
     Serial.println ("LED Dang Tat ");
@@ -37,6 +42,15 @@ void loop() {
   if (digitalRead(button) == HIGH)
   {
     digitalWrite(led8, HIGH);
+
+    digitalWrite(led0, HIGH);
+    delay (300);
+    digitalWrite(led0, LOW);
+    delay (300);
+    digitalWrite(led0, HIGH);
+    delay (300);
+    digitalWrite(led0, LOW);
+
     digitalWrite(led, LOW);
     // Serial.write("on");
     Serial.println("on");
@@ -44,6 +58,17 @@ void loop() {
   }
   else { // ngược lại
     digitalWrite(led8, LOW);
+
+    digitalWrite(led0, HIGH);
+    delay (300);
+    digitalWrite(led0, LOW);
+    delay (300);
+    digitalWrite(led0, HIGH);
+    delay (300);
+    digitalWrite(led0, LOW);
+    delay (300);
+    digitalWrite(led0, HIGH);
+
     digitalWrite(led, HIGH);
     // Serial.write("off");
     Serial.println("off");
