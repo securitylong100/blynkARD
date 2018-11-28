@@ -39,10 +39,10 @@ void setup()
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
   {
-    delay(500);
+    delay(250);
     Serial.print(".");
     digitalWrite(lednetwork, HIGH);
-    delay (500);
+    delay (250);
     digitalWrite(lednetwork, LOW);
   }
   Serial.println("");
@@ -159,7 +159,8 @@ byte doFTP(boolean upload) {
     return 0;
   }
 
-  if (upload) {
+  if (upload)
+  {
     if (debug) Serial.println("Send STOR filename");
     //client.print("MKD ");
     // client.println(Folder_name);
@@ -167,7 +168,9 @@ byte doFTP(boolean upload) {
     client.println(Folder_name);
     client.print(F("STOR "));
     client.println(fileName);
-  } else {
+  }
+  else
+  {
     if (debug) Serial.println("Send RETR filename");
     client.print(F("RETR "));
     client.println(fileName);
@@ -193,7 +196,8 @@ byte doFTP(boolean upload) {
     //Serial.println(data2);
 
   }
-  else {
+  else
+  {
     while (dclient.connected()) {
       while (dclient.available()) {
         char c = dclient.read();
@@ -204,18 +208,6 @@ byte doFTP(boolean upload) {
 
   dclient.stop();
   Serial.println(F("Data disconnected"));
-  digitalWrite(lednetwork, HIGH);
-  delay (100);
-  digitalWrite(lednetwork, LOW);
-  delay (100);
-
-  {
-    digitalWrite(lednetwork, HIGH);
-    delay (100);
-    digitalWrite(lednetwork, LOW);
-    delay (100);
-  }
-
   if (!eRcv()) return 0;
 
   client.println(F("QUIT"));
@@ -235,6 +227,14 @@ void callFTP()
   {
     Serial.println(F("FTP OK"));
     Serial.println("");
+    digitalWrite(led8, HIGH);
+    delay (100);
+    digitalWrite(led8, LOW);
+    delay (100);
+    digitalWrite(led8, HIGH);
+    delay (100);
+    digitalWrite(led8, LOW);
+    delay (100);
   }
   else
   {
@@ -245,15 +245,24 @@ void loop()
 {
   while (WiFi.status() != WL_CONNECTED)
   {
-    delay(500);
+    delay(250);
     Serial.print(".");
     digitalWrite(lednetwork, HIGH);
-    delay (500);
+    delay (250);
     digitalWrite(lednetwork, LOW);
   }
-  if (digitalRead(button) == HIGH)
+  if (digitalRead(button) == LOW)
   {
     digitalWrite(led8, HIGH);
+    digitalWrite(led, LOW);
+    Serial.println("on");
+    data1 = "Tin hieu da len server";
+    callFTP();
+  }
+  /* //code xuat lien tuc
+    if (digitalRead(button) == HIGH)
+    {
+    digitalWrite(led8, LOW);
     digitalWrite(led, LOW);
     Serial.println("on");
     data1 = "Led dang ON";
@@ -264,10 +273,10 @@ void loop()
       Serial.println("Xuất file");
       callFTP();
     }
-  }
-  else
-  {
-    digitalWrite(led8, LOW);
+    }
+    else
+    {
+    digitalWrite(led8, HIGH);
     digitalWrite(led, HIGH);
     Serial.println("off");
     data1 = "Led dang OFF";
@@ -278,6 +287,6 @@ void loop()
       Serial.println("Xuất file");
       callFTP();
     }
-  }
-
+    }
+  */
 }
