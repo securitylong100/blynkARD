@@ -43,7 +43,7 @@ void setup()
     Serial.print(".");
     digitalWrite(lednetwork, HIGH);
     delay (500);
-    digitalWrite(lednetwork, LOW); 
+    digitalWrite(lednetwork, LOW);
   }
   Serial.println("");
   Serial.println("WiFi connected");
@@ -204,12 +204,18 @@ byte doFTP(boolean upload) {
 
   dclient.stop();
   Serial.println(F("Data disconnected"));
- 
+  digitalWrite(lednetwork, HIGH);
+  delay (100);
+  digitalWrite(lednetwork, LOW);
+  delay (100);
+
+  {
     digitalWrite(lednetwork, HIGH);
     delay (100);
     digitalWrite(lednetwork, LOW);
     delay (100);
-  
+  }
+
   if (!eRcv()) return 0;
 
   client.println(F("QUIT"));
@@ -237,13 +243,13 @@ void callFTP()
 }
 void loop()
 {
-   while (WiFi.status() != WL_CONNECTED)
+  while (WiFi.status() != WL_CONNECTED)
   {
     delay(500);
     Serial.print(".");
     digitalWrite(lednetwork, HIGH);
     delay (500);
-    digitalWrite(lednetwork, LOW); 
+    digitalWrite(lednetwork, LOW);
   }
   if (digitalRead(button) == HIGH)
   {
@@ -258,7 +264,6 @@ void loop()
       Serial.println("Xuất file");
       callFTP();
     }
-
   }
   else
   {
