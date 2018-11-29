@@ -1,16 +1,23 @@
 #include <ESP8266WiFi.h>
+#include <ArduinoJson.h>
 #include <SPI.h>
 #include <String.h>
 #include <SD.h>
 int button = 16; // là tx gắn d2
+int switchK = 5;  //switch change kênh
 int led8 = 0; //gan d8
 int led = LED_BUILTIN;
+int led5 = 14;
+int led6 = 12;
+int led7 = 13;
 int lednetwork = 4;
 
 //const char* ssid     = "iPhone";
 //const char* password = "longcoi12345";
 const char* ssid     = "TaoLaGa49";
 const char* password = "longcoi123";
+const char* ssid_web = "iPhone";
+const char* password_web = "longcoi12345";
 const String ftp_account = "ftpin";
 const String ftp_passwords = "ftppass";
 const char *server = "192.168.145.7";
@@ -25,18 +32,33 @@ char outBuf[128];
 boolean debug = true;
 boolean upload = true;
 String StatusLed;
-long count = millis();
+long countMiliis = millis();
+const char* host = "iottechno.com";
+String url;
+int count = 0;
 void setup()
 {
   Serial.begin(9600);
   pinMode(button, INPUT);
+  pinMode (switchK, INPUT);
   pinMode(led, OUTPUT);
   pinMode(led8, OUTPUT);
+  pinMode (led5, OUTPUT);
+  pinMode (led6, OUTPUT);
+  pinMode (led7, OUTPUT);
   pinMode(lednetwork, OUTPUT);
   delay(100);
   Serial.print("Connecting to ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, password);
+  if (digitalRead(switchK) == HIGH)
+  {
+    Serial.println(ssid);
+    WiFi.begin(ssid, password);
+  }
+  if (digitalRead(switchK) == LOW)
+  {
+    Serial.println(ssid_web);
+    WiFi.begin(ssid_web, password_web);
+  }
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(250);
@@ -225,16 +247,19 @@ void callFTP()
 {
   if (doFTP(upload))
   {
+
     Serial.println(F("FTP OK"));
     Serial.println("");
-    digitalWrite(led8, HIGH);
-    delay (100);
     digitalWrite(led8, LOW);
-    delay (100);
-    digitalWrite(led8, HIGH);
-    delay (100);
-    digitalWrite(led8, LOW);
-    delay (100);
+    digitalWrite(led5, HIGH);
+    delay (200);
+    digitalWrite(led6, HIGH);
+    delay (200);
+    digitalWrite(led7, HIGH);
+    delay (800);
+    digitalWrite(led5, LOW);
+    digitalWrite(led6, LOW);
+    digitalWrite(led7, LOW);
   }
   else
   {
@@ -251,14 +276,117 @@ void loop()
     delay (250);
     digitalWrite(lednetwork, LOW);
   }
-  if (digitalRead(button) == LOW)
+  if ((digitalRead(button) == LOW) && (digitalRead(switchK) == HIGH))
   {
     digitalWrite(led8, HIGH);
     digitalWrite(led, LOW);
     Serial.println("on");
-    data1 = "Tin hieu da len server";
+    data1 = "Bonding Machine,1,1000-01-01 00:00:00";
     callFTP();
   }
+  if (digitalRead(switchK) == LOW)
+  {
+    Serial.print("connecting to ");
+    Serial.println(host);
+
+    WiFiClient client;
+    const int httpPort = 80;
+    if (!client.connect(host, httpPort)) {
+      Serial.println("connection failed");
+      return;
+    }
+
+    if (count == 0) {
+      url = "/thuy/api/led/read_all.php?id=1";
+      count = count + 1;
+      Serial.println("Here1");
+    }
+    else if (count == 1) {
+      url = "/thuy/api/led/read_all.php?id=2";
+      count = count + 1;
+      Serial.println("Here2");
+    }
+    else if (count == 2) {
+      url = "/thuy/api/led/read_all.php?id=3";
+      count = count + 1;
+      Serial.println("Here3");
+    }
+    Serial.print("Requesting URL: ");
+    Serial.println(url);
+
+    client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+                 "Host: " + host + "\r\n" +
+                 "Connection: close\r\n\r\n");
+    delay(500);
+    String section = "header";
+    int i = 0;
+    while (client.available()) {
+      String line = client.readStringUntil('\n');
+      // Serial.print(line);
+      i = i + 1;
+      // delay(500);
+      // Serial.print(String(i));
+      // we’ll parse the HTML body here
+      if (i == 11)  { // print the good stuff
+        i = 1;
+        String result = line;
+        // Serial.print(result);
+        // Parse JSON
+        int size = result.length() + 1;
+        char json[size];
+        result.toCharArray(json, size);
+        StaticJsonBuffer<100> jsonBuffer;
+        JsonObject& json_parsed = jsonBuffer.parseObject(json);
+        if (!json_parsed.success())
+        {
+          Serial.println("parseObject() failed");
+          return;
+        }
+        String led = json_parsed["led"][0]["status"];
+
+        if (count == 1) {
+          if (led == "on") {
+            digitalWrite(12, 1);
+            delay(100);
+            Serial.println("D1 is On..!");
+          }
+          else if (led == "off") {
+            digitalWrite(12, 0);
+            delay(100);
+            Serial.println("D1 is Off..!");
+          }
+        }
+        else if (count == 2) {
+          if (led == "on") {
+            digitalWrite(13, 1);
+            Serial.println("D2 is On..!");
+          }
+          else if (led == "off") {
+            digitalWrite(13, 0);
+            Serial.println("D2 is Off..!");
+          }
+        }
+        else if (count == 3) {
+          if (led == "on") {
+            digitalWrite(14, 1);
+            Serial.println("D3 is On..!");
+          }
+          else if (led == "off") {
+            digitalWrite(14, 0);
+            Serial.println("D3 is Off..!");
+          }
+          count = 0;
+        }
+
+        if (count == 3)
+          count = 0;
+
+      }
+    }
+    Serial.println();
+    Serial.println("closing connection");
+  }
+
   /* //code xuat lien tuc
     if (digitalRead(button) == HIGH)
     {
@@ -267,9 +395,9 @@ void loop()
     Serial.println("on");
     data1 = "Led dang ON";
 
-    if ((millis() - count) > 10000)
+    if ((millis() - countMiliis) > 10000)
     {
-      count = millis();
+      countMiliis = millis();
       Serial.println("Xuất file");
       callFTP();
     }
@@ -281,9 +409,9 @@ void loop()
     Serial.println("off");
     data1 = "Led dang OFF";
 
-    if ((millis() - count) > 10000)
+    if ((millis() - countMiliis) > 10000)
     {
-      count = millis();
+      countMiliis = millis();
       Serial.println("Xuất file");
       callFTP();
     }

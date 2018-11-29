@@ -5,17 +5,17 @@
 
 const int kNetworkTimeout = 30 * 1000;
 const int kNetworkDelay = 1000;
-const char* ssid     = "iPhone";
-const char* password = "longcoi12345";
+const char* ssid     = "Kumi";
+const char* password = "kumi12345";
 const char* host = "iottechno.com"; //replace it with your webhost url
 String url;
 int count = 0;
 void setup() {
   Serial.begin(115200);
   delay(100);
-  pinMode(16, OUTPUT);//connect pin2
-  pinMode(0, OUTPUT); //connect pin 8
-  pinMode(3, OUTPUT); //connect pin 0
+  pinMode(14, OUTPUT);//connect pin2
+  pinMode(12, OUTPUT); //connect pin 8
+  pinMode(13, OUTPUT); //connect pin 0
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(16, 0);
   digitalWrite(0, 0);
@@ -106,33 +106,33 @@ void loop() {
 
       if (count == 1) {
         if (led == "on") {
-          digitalWrite(16, 1);
+          digitalWrite(12, 1);
           delay(100);
           Serial.println("D1 is On..!");
         }
         else if (led == "off") {
-          digitalWrite(16, 0);
+          digitalWrite(12, 0);
           delay(100);
           Serial.println("D1 is Off..!");
         }
       }
       else if (count == 2) {
         if (led == "on") {
-          digitalWrite(0, 1);
+          digitalWrite(13, 1);
           Serial.println("D2 is On..!");
         }
         else if (led == "off") {
-          digitalWrite(0, 0);
+          digitalWrite(13, 0);
           Serial.println("D2 is Off..!");
         }
       }
       else if (count == 3) {
         if (led == "on") {
-          digitalWrite(3, 1);
+          digitalWrite(14, 1);
           Serial.println("D3 is On..!");
         }
         else if (led == "off") {
-          digitalWrite(3, 0);
+          digitalWrite(14, 0);
           Serial.println("D3 is Off..!");
         }
         count = 0;

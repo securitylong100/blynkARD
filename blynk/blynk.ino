@@ -3,19 +3,19 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 
-//char auth[] = "a72488240cb24d7e979684466c809887";        //Token cua blynk
-char auth[] = "4a21fc54ff7742b489e99c161c1e42df"; //key thuy
-//char ssid[] = "iPhone";        //Ten wifi
-//char pass[] = "longcoi12345";         //Pass wifi
-char ssid[] = "82 LAU 1";
-char pass[] = "123456789";
+char auth[] = "a72488240cb24d7e979684466c809887";        //Token cua blynk
+//char auth[] = "4a21fc54ff7742b489e99c161c1e42df"; //key thuy
+char ssid[] = "Kumi";        //Ten wifi
+char pass[] = "kumi12345";         //Pass wifi
+//char ssid[] = "82 LAU 1";
+//char pass[] = "123456789";
 
 void setup() {
   Serial.begin(9600);                   // Mo Serial
   Blynk.begin(auth, ssid, pass);        // Ket noi voi blynk
-  pinMode(16, OUTPUT);//phong khach V1
-  pinMode(0, OUTPUT); //phong ngu V2
-  pinMode(3, OUTPUT); //nha tam V3
+  pinMode(12, OUTPUT);//phong khach V1
+  pinMode(13, OUTPUT); //phong ngu V2
+  pinMode(14, OUTPUT); //nha tam V3
 
 }
 BLYNK_WRITE(1) //khoi tao phong khach
@@ -23,11 +23,11 @@ BLYNK_WRITE(1) //khoi tao phong khach
   int i = param.asInt();
   if (i == 1)
   {
-    digitalWrite(16, HIGH);
+    digitalWrite(12, HIGH);
   }
   else
   {
-    digitalWrite(16, LOW);
+    digitalWrite(12, LOW);
   }
 }
 
@@ -36,11 +36,11 @@ BLYNK_WRITE(2) //khoi tao phong ngu
   int i = param.asInt();
   if (i == 1)
   {
-    digitalWrite(0, HIGH);
+    digitalWrite(13, HIGH);
   }
   else
   {
-    digitalWrite(0, LOW);
+    digitalWrite(13, LOW);
   }
 }
 BLYNK_WRITE(3) //khoi tao nha tam
@@ -48,11 +48,11 @@ BLYNK_WRITE(3) //khoi tao nha tam
   int i = param.asInt();
   if (i == 1)
   {
-    digitalWrite(3, HIGH);
+    digitalWrite(14, HIGH);
   }
   else
   {
-    digitalWrite(3, LOW);
+    digitalWrite(14, LOW);
   }
 }
 //ket thuc 3 nut nhan.
