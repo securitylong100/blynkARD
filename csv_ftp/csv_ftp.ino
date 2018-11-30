@@ -76,8 +76,16 @@ void setup()
   Serial.print("Gateway: ");
   Serial.println(WiFi.gatewayIP());
   digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(led5, HIGH);
+  digitalWrite(led6, HIGH);
+  digitalWrite(led7, HIGH);
+  digitalWrite(led8, HIGH);
   delay(500);
   digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(led5, LOW);
+  digitalWrite(led6, LOW);
+  digitalWrite(led7, LOW);
+  digitalWrite(led8, LOW);
   delay(500);
 }
 void efail() {
