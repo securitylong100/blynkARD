@@ -16,8 +16,8 @@ int lednetwork = 4;
 //const char* password = "longcoi12345";
 const char* ssid     = "TaoLaGa49";
 const char* password = "longcoi123";
-const char* ssid_web = "iPhone";
-const char* password_web = "longcoi12345";
+const char* ssid_web = "Long";
+const char* password_web = "longcoi123";
 const String ftp_account = "ftpin";
 const String ftp_passwords = "ftppass";
 const char *server = "192.168.145.7";
@@ -286,11 +286,18 @@ void loop()
   }
   if ((digitalRead(button) == LOW) && (digitalRead(switchK) == HIGH))
   {
-    digitalWrite(led8, HIGH);
-    digitalWrite(led, LOW);
-    Serial.println("on");
-    data1 = "Bonding Machine,1,1000-01-01 00:00:00";
-    callFTP();
+    countMiliis = millis();
+    while ((digitalRead(button) == LOW) && (digitalRead(switchK) == HIGH))
+    {
+      if (millis() - countMiliis > 300)
+      {
+        digitalWrite(led8, HIGH);
+        digitalWrite(led, LOW);
+        Serial.println("on");
+        data1 = "Bonding Machine,1,1000-01-01 00:00:00";
+        callFTP();
+      }
+    }
   }
   if (digitalRead(switchK) == LOW)
   {
