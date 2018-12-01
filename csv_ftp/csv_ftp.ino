@@ -12,11 +12,11 @@ int led6 = 12;
 int led7 = 13;
 int lednetwork = 4;
 
-//const char* ssid     = "iPhone";
-//const char* password = "longcoi12345";
-const char* ssid     = "TaoLaGa49";
-const char* password = "longcoi123";
-const char* ssid_web = "Long";
+const char* ssid     = "GA1";
+const char* password = "@#ncvp2019";
+//const char* ssid     = "TaoLaGa49";
+//const char* password = "longcoi123";
+const char* ssid_web = "iPhone";
 const char* password_web = "longcoi123";
 const String ftp_account = "ftpin";
 const String ftp_passwords = "ftppass";
@@ -296,6 +296,7 @@ void loop()
         Serial.println("on");
         data1 = "Bonding Machine,1,1000-01-01 00:00:00";
         callFTP();
+        countMiliis = millis();
       }
     }
   }
