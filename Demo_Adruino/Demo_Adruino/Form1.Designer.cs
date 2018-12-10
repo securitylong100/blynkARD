@@ -29,9 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,24 +46,31 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbMC = new System.Windows.Forms.ComboBox();
+            this.Machine = new System.Windows.Forms.Label();
             this.txtTimer = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.Machine = new System.Windows.Forms.Label();
-            this.cmbMC = new System.Windows.Forms.ComboBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chart_output = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_output)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpFrom
             // 
-            this.dtpFrom.CustomFormat = "yyyy-MM-dd hh:mm";
+            this.dtpFrom.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFrom.Location = new System.Drawing.Point(18, 56);
-            this.dtpFrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFrom.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(139, 22);
             this.dtpFrom.TabIndex = 0;
@@ -87,10 +97,10 @@
             // 
             // dtpTo
             // 
-            this.dtpTo.CustomFormat = "yyyy-MM-dd hh:mm";
+            this.dtpTo.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTo.Location = new System.Drawing.Point(165, 56);
-            this.dtpTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpTo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpTo.Name = "dtpTo";
             this.dtpTo.Size = new System.Drawing.Size(139, 22);
             this.dtpTo.TabIndex = 2;
@@ -98,7 +108,7 @@
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(313, 52);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 28);
             this.btnSearch.TabIndex = 4;
@@ -109,35 +119,25 @@
             // dgv
             // 
             this.dgv.AllowUserToAddRows = false;
-            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv.ColumnHeadersHeight = 28;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dgv.Location = new System.Drawing.Point(0, 113);
-            this.dgv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgv.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgv.Location = new System.Drawing.Point(3, 3);
+            this.dgv.Margin = new System.Windows.Forms.Padding(4);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv.RowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgv.Size = new System.Drawing.Size(969, 435);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv.Size = new System.Drawing.Size(454, 388);
             this.dgv.TabIndex = 5;
             // 
             // timer1
@@ -148,7 +148,7 @@
             // btnLoad
             // 
             this.btnLoad.Location = new System.Drawing.Point(115, 53);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(100, 28);
             this.btnLoad.TabIndex = 6;
@@ -169,7 +169,7 @@
             // txtQty
             // 
             this.txtQty.Location = new System.Drawing.Point(76, 53);
-            this.txtQty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(116, 22);
             this.txtQty.TabIndex = 9;
@@ -181,17 +181,35 @@
             this.groupBox1.Controls.Add(this.txtQty);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Location = new System.Drawing.Point(5, 2);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(291, 93);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
+            // cmbMC
+            // 
+            this.cmbMC.FormattingEnabled = true;
+            this.cmbMC.Location = new System.Drawing.Point(76, 16);
+            this.cmbMC.Name = "cmbMC";
+            this.cmbMC.Size = new System.Drawing.Size(192, 24);
+            this.cmbMC.TabIndex = 11;
+            // 
+            // Machine
+            // 
+            this.Machine.AutoSize = true;
+            this.Machine.Location = new System.Drawing.Point(10, 19);
+            this.Machine.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Machine.Name = "Machine";
+            this.Machine.Size = new System.Drawing.Size(59, 16);
+            this.Machine.TabIndex = 10;
+            this.Machine.Text = "Machine";
+            // 
             // txtTimer
             // 
             this.txtTimer.Location = new System.Drawing.Point(8, 56);
-            this.txtTimer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTimer.Margin = new System.Windows.Forms.Padding(4);
             this.txtTimer.Name = "txtTimer";
             this.txtTimer.Size = new System.Drawing.Size(99, 22);
             this.txtTimer.TabIndex = 11;
@@ -236,23 +254,59 @@
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             // 
-            // Machine
+            // tabControl1
             // 
-            this.Machine.AutoSize = true;
-            this.Machine.Location = new System.Drawing.Point(10, 19);
-            this.Machine.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Machine.Name = "Machine";
-            this.Machine.Size = new System.Drawing.Size(59, 16);
-            this.Machine.TabIndex = 10;
-            this.Machine.Text = "Machine";
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(5, 120);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(959, 423);
+            this.tabControl1.TabIndex = 15;
             // 
-            // cmbMC
+            // tabPage1
             // 
-            this.cmbMC.FormattingEnabled = true;
-            this.cmbMC.Location = new System.Drawing.Point(76, 16);
-            this.cmbMC.Name = "cmbMC";
-            this.cmbMC.Size = new System.Drawing.Size(192, 24);
-            this.cmbMC.TabIndex = 11;
+            this.tabPage1.Controls.Add(this.chart_output);
+            this.tabPage1.Controls.Add(this.dgv);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(951, 394);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Bonding Process";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(961, 394);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "App check Process";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // chart_output
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart_output.ChartAreas.Add(chartArea1);
+            this.chart_output.Dock = System.Windows.Forms.DockStyle.Right;
+            legend1.Name = "Legend1";
+            this.chart_output.Legends.Add(legend1);
+            this.chart_output.Location = new System.Drawing.Point(454, 3);
+            this.chart_output.Name = "chart_output";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart_output.Series.Add(series1);
+            this.chart_output.Size = new System.Drawing.Size(494, 388);
+            this.chart_output.TabIndex = 6;
+            this.chart_output.Text = "chart1";
+            title1.Name = "Title1";
+            this.chart_output.Titles.Add(title1);
             // 
             // Form1
             // 
@@ -260,12 +314,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(969, 538);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.dgv);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "GA1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -276,6 +330,9 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart_output)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -299,6 +356,10 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox cmbMC;
         private System.Windows.Forms.Label Machine;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart_output;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Demo_Adruino
 {
@@ -56,17 +57,51 @@ namespace Demo_Adruino
                 }
                 txtQty.Text = (tong * 6).ToString();
             }
+            ShowChartOutput();
         }
+        public void ShowChartOutput()
+        {
+            if(dgv.RowCount >8)
+            {
+                DateTime b = DateTime.Parse(dgv.Rows[0].Cells["date_time"].Value.ToString());
+                DateTime a = DateTime.Parse(dgv.Rows[dgv.RowCount - 1].Cells["date_time"].Value.ToString());
+                TimeSpan c = (b - a);
 
+            }
+
+            /*
+            chart_output.ResetAutoValues();
+            chart_output.ResumeLayout();
+            chart_output.Series.Clear();
+            chart_output.Titles[0].Text = "CHART SHOW OUTPUT DATA";
+            chart_output.Titles[0].Font = new Font("Arial", 16, FontStyle.Bold);
+            chart_output.ChartAreas[0].AxisX.LabelStyle.Format = "dd-MM HH:mm";
+            chart_output.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            chart_output.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+            chart_output.ChartAreas[0].AxisX.LabelStyle.Angle = -60;
+            chart_output.ChartAreas[0].AxisY.Title = "OUTPUT [PCS]";
+
+            chart_output.Series.Add("Output");
+            chart_output.Series["Output"].XValueType = ChartValueType.Date;
+            chart_output.Series["Output"].ChartType = SeriesChartType.Line;
+            chart_output.Series["Output"].Color = Color.FromArgb(0, 192, 0); //blue
+            chart_output.Series["Output"].XValueMember = "date_time";
+            chart_output.Series["Output"].YValueMembers = "data_";
+            chart_output.Series["Output"].IsValueShownAsLabel = true;
+            chart_output.DataSource = dgv.DataSource;
+            chart_output.DataBind();
+            //end chart
+            */
+        }
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            loadDGV(true, dtpFrom.Value.ToShortDateString() + " 00:00:00",dtpTo.Value.ToShortDateString() + " 23:59:59");
+            loadDGV(true, dtpFrom.Value.ToString(),dtpTo.Value.ToString());
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             runBat();
-            loadDGV(false, DateTime.Now.ToShortDateString() + " 06:00:00", "");
+            loadDGV(false, dtpFrom.Value.ToString(), "");
         }
         public void runBat()
         {
@@ -80,7 +115,7 @@ namespace Demo_Adruino
             if (btnLoad.Text == "Auto Load")
             {
                 runBat();
-                loadDGV(false, DateTime.Now.ToShortDateString() + " 06:00:00", "");
+                loadDGV(false, dtpFrom.Value.ToString(), "");
                 btnSearch.Enabled = false;
                 btnLoad.Text = "Stop";
                 if (txtTimer.Text != "")
