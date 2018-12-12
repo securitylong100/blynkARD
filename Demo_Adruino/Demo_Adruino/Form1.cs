@@ -169,7 +169,7 @@ namespace Demo_Adruino
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            runBat();
+            //runBat();
             loadDGV(false, dtpFrom.Value.ToString(), "");
             loadDGV_NG(false, dtpFrom.Value.ToString(), "");
         }
