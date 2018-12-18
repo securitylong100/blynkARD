@@ -246,6 +246,7 @@
             this.btn_search_data.TabIndex = 0;
             this.btn_search_data.Text = "Search";
             this.btn_search_data.UseVisualStyleBackColor = true;
+            this.btn_search_data.Click += new System.EventHandler(this.btn_search_data_Click);
             // 
             // IoT_Main_Form
             // 
