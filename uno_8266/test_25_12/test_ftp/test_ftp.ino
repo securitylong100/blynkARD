@@ -7,19 +7,19 @@
 #include <SD.h>
 //const char* ssid     = "GA1";
 //const char* password = "@#ncvp2019";
-//const char* ssid     = "TaoLaGa49";
-//const char* password = "longcoi123";
-//const String ftp_account = "ftpin";
-//const String ftp_passwords = "ftppass";
-//const char *server = "192.168.145.7";
+const char* ssid     = "TaoLaGa49";
+const char* password = "longcoi123";
+const String ftp_account = "ftpin";
+const String ftp_passwords = "ftppass";
+const char *server = "192.168.145.7";
 
-const char* ssid     = "TP-LINK_P03";
-const char* password = "hoihoaivaydaica";
-const String ftp_account = "iottechn";
-const String ftp_passwords = "admin1@";
-const char *server = "iottechno.com";
+//const char* ssid     = "TP-LINK_P03";
+//const char* password = "hoihoaivaydaica";
+//const String ftp_account = "iottechn";
+//const String ftp_passwords = "admin1@";
+//const char *server = "iottechno.com";
 
-String fileName = "test.csv";
+String fileName = "testnew.csv";
 String Folder_name = "459qb";
 
 WiFiClient client;
@@ -527,4 +527,3 @@ void delete_after_send_done()
     if (debug)Serial.println("send.csv doesn't exist.");
   }
 }
-
