@@ -3,10 +3,9 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 
-char auth[] = "a72488240cb24d7e979684466c809887";        //Token cua blynk
-//char auth[] = "4a21fc54ff7742b489e99c161c1e42df"; //key thuy
-char ssid[] = "Kumi";        //Ten wifi
-char pass[] = "kumi12345";         //Pass wifi
+char auth[] = "a72488240cb24d7e979684466c809887";        
+char ssid[] = "NCVP-Guest";        //Ten wifi
+char pass[] = "201903pass";         //Pass wifi
 //char ssid[] = "82 LAU 1";
 //char pass[] = "123456789";
 

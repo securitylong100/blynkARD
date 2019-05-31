@@ -6,11 +6,11 @@
 int button = 16; // là tx gắn d2
 int switchK = 5;  //switch change kênh
 int led8 = 0; //gan d8
-int led = LED_BUILTIN;
+int led = 4;
 int led5 = 14;
 int led6 = 12;
 int led7 = 13;
-int lednetwork = 4;
+int lednetwork = LED_BUILTIN;
 
 const char* ssid     = "GA1";
 const char* password = "@#ncvp2019";

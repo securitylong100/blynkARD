@@ -3,16 +3,18 @@ int val = 8888;
 int tranfer;
 bool check = false;
 int button = 16; // gan chân d2
-int led8 = 0; //ok gan chân 0
-int led0 = 11;
+int led4 = 4; //ok gan chân 0
+int led6 = 12; //ok gan chân 0
+int led7 = 13; //ok gan chân 0
 
 int led = LED_BUILTIN;
 
+
 void setup() {
   pinMode(button, INPUT);
-  pinMode(led, OUTPUT);
-  pinMode(led8, OUTPUT);
-  pinMode(led0, OUTPUT);
+  pinMode(led4, OUTPUT);
+  pinMode (led6, OUTPUT);
+  pinMode(led7, OUTPUT);
   Serial.begin(9600);
 }
 void loop() {
@@ -22,59 +24,39 @@ void loop() {
     // Serial.println(val);
     delay(200);
   }
-  if (val == '0' )
+  if (val == '5' )
   {
-    digitalWrite(led8, HIGH);
-    digitalWrite(led, LOW);
-    delay(200);
-    digitalWrite(led, LOW);
-    tranfer = '00';
+    digitalWrite(led4, LOW);
+  }
+  if (val == '6' )
+  {
+    digitalWrite(led6, LOW);
+  }
+  if (val == '7' )
+  {
+    digitalWrite(led7, LOW);
     Serial.println ("LED Dang Tat ");
-
-  } else if (val == '1')
+  }
+  else if (val == '1')
   {
-    digitalWrite(led8, LOW);
-    digitalWrite(led, HIGH);
-    tranfer = '11';
+    digitalWrite(led4, HIGH);
     Serial.println ("LED Dang Sáng ");
+    delay (250);
+    digitalWrite(led4, LOW);
   }
-
-  if (digitalRead(button) == HIGH)
+  else if (val == '2')
   {
-    digitalWrite(led8, HIGH);
-
-    digitalWrite(led0, HIGH);
-    delay (300);
-    digitalWrite(led0, LOW);
-    delay (300);
-    digitalWrite(led0, HIGH);
-    delay (300);
-    digitalWrite(led0, LOW);
-
-    digitalWrite(led, LOW);
-    // Serial.write("on");
-    Serial.println("on");
-    delay (200);
+    digitalWrite(led6, HIGH);
+    Serial.println ("LED Dang Sáng ");
+    delay (250);
+    digitalWrite(led6, LOW);
   }
-  else { // ngược lại
-    digitalWrite(led8, LOW);
-
-    digitalWrite(led0, HIGH);
-    delay (300);
-    digitalWrite(led0, LOW);
-    delay (300);
-    digitalWrite(led0, HIGH);
-    delay (300);
-    digitalWrite(led0, LOW);
-    delay (300);
-    digitalWrite(led0, HIGH);
-
-    digitalWrite(led, HIGH);
-    // Serial.write("off");
-    Serial.println("off");
-    delay (200);
+  else if (val == '3')
+  {
+    digitalWrite(led7, HIGH);
+    Serial.println ("LED Dang Sáng ");
+     delay (250);
+    digitalWrite(led7, LOW);
   }
 
-  //Serial.write(tranfer);
-  //delay (1000);
 }

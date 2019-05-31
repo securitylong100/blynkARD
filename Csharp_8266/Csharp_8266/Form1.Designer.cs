@@ -32,10 +32,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmb_com = new System.Windows.Forms.ComboBox();
             this.btn_ketnoi = new System.Windows.Forms.Button();
-            this.btn_led = new System.Windows.Forms.Button();
+            this.btn_led_1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.serialcom = new System.IO.Ports.SerialPort(this.components);
             this.btn_tcpip = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btn_led_2 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btn_led_3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -65,24 +69,24 @@
             this.btn_ketnoi.UseVisualStyleBackColor = true;
             this.btn_ketnoi.Click += new System.EventHandler(this.btn_ketnoi_Click);
             // 
-            // btn_led
+            // btn_led_1
             // 
-            this.btn_led.Location = new System.Drawing.Point(192, 92);
-            this.btn_led.Name = "btn_led";
-            this.btn_led.Size = new System.Drawing.Size(127, 23);
-            this.btn_led.TabIndex = 3;
-            this.btn_led.Text = "Đã Tắt";
-            this.btn_led.UseVisualStyleBackColor = true;
-            this.btn_led.Click += new System.EventHandler(this.btn_led_Click);
+            this.btn_led_1.Location = new System.Drawing.Point(192, 92);
+            this.btn_led_1.Name = "btn_led_1";
+            this.btn_led_1.Size = new System.Drawing.Size(82, 23);
+            this.btn_led_1.TabIndex = 3;
+            this.btn_led_1.Text = "Đã Tắt";
+            this.btn_led_1.UseVisualStyleBackColor = true;
+            this.btn_led_1.Click += new System.EventHandler(this.btn_led_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(90, 97);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 13);
+            this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Trang Thái Led:";
+            this.label2.Text = "Trang Thái Led 1";
             // 
             // serialcom
             // 
@@ -90,7 +94,7 @@
             // 
             // btn_tcpip
             // 
-            this.btn_tcpip.Location = new System.Drawing.Point(192, 139);
+            this.btn_tcpip.Location = new System.Drawing.Point(192, 233);
             this.btn_tcpip.Name = "btn_tcpip";
             this.btn_tcpip.Size = new System.Drawing.Size(127, 23);
             this.btn_tcpip.TabIndex = 5;
@@ -98,14 +102,56 @@
             this.btn_tcpip.UseVisualStyleBackColor = true;
             this.btn_tcpip.Click += new System.EventHandler(this.btn_tcpip_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(90, 139);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Trang Thái Led 2";
+            // 
+            // btn_led_2
+            // 
+            this.btn_led_2.Location = new System.Drawing.Point(192, 134);
+            this.btn_led_2.Name = "btn_led_2";
+            this.btn_led_2.Size = new System.Drawing.Size(82, 23);
+            this.btn_led_2.TabIndex = 6;
+            this.btn_led_2.Text = "Đã Tắt";
+            this.btn_led_2.UseVisualStyleBackColor = true;
+            this.btn_led_2.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(90, 181);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Trang Thái Led 3";
+            // 
+            // btn_led_3
+            // 
+            this.btn_led_3.Location = new System.Drawing.Point(192, 176);
+            this.btn_led_3.Name = "btn_led_3";
+            this.btn_led_3.Size = new System.Drawing.Size(82, 23);
+            this.btn_led_3.TabIndex = 8;
+            this.btn_led_3.Text = "Đã Tắt";
+            this.btn_led_3.UseVisualStyleBackColor = true;
+            this.btn_led_3.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 189);
+            this.ClientSize = new System.Drawing.Size(451, 338);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btn_led_3);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btn_led_2);
             this.Controls.Add(this.btn_tcpip);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btn_led);
+            this.Controls.Add(this.btn_led_1);
             this.Controls.Add(this.btn_ketnoi);
             this.Controls.Add(this.cmb_com);
             this.Controls.Add(this.label1);
@@ -122,10 +168,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmb_com;
         private System.Windows.Forms.Button btn_ketnoi;
-        private System.Windows.Forms.Button btn_led;
+        private System.Windows.Forms.Button btn_led_1;
         private System.Windows.Forms.Label label2;
         private System.IO.Ports.SerialPort serialcom;
         private System.Windows.Forms.Button btn_tcpip;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btn_led_2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btn_led_3;
     }
 }
 

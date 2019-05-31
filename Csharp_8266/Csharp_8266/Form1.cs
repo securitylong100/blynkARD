@@ -46,22 +46,34 @@ namespace Csharp_8266
 
         private void btn_led_Click(object sender, EventArgs e)
         {
+            led("1", "5", btn_led_1);
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            led("2", "6", btn_led_2);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            led("3", "7", btn_led_3);
+        }
+        void led(string sang, string tat,Button btn_led)
+        {
             if (btn_led.Text == "Đang Sáng")
             {
-                serialcom.Write("1");
+                serialcom.Write(tat);
                 btn_led.Text = "Đã Tắt";
                 btn_led.BackColor = SystemColors.Control;
             }
             else if (btn_led.Text == "Đã Tắt")
             {
-                serialcom.Write("0");
+                serialcom.Write(sang);
                 btn_led.Text = "Đang Sáng";
                 btn_led.BackColor = Color.Red;
             }
-
         }
         string atam = "";
-        private void serialcom_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
+      private void serialcom_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
         {
              
            
@@ -77,5 +89,7 @@ namespace Csharp_8266
             Wifi_Form wififrm = new Wifi_Form();            
             wififrm.ShowDialog();
         }
+
+     
     }
 }
