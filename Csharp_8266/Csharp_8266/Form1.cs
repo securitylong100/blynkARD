@@ -13,10 +13,11 @@ namespace Csharp_8266
 {
     public partial class Form1 : Form
     {
-        public string content;
+        public string content = "long";
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -28,7 +29,7 @@ namespace Csharp_8266
         {
             if (btn_ketnoi.Text == "Đang Ngắt Kết Nối")
             {
-                if (!serialcom.IsOpen) 
+                if (!serialcom.IsOpen)
                 {
 
                     serialcom.PortName = cmb_com.Text;
@@ -46,50 +47,68 @@ namespace Csharp_8266
 
         private void btn_led_Click(object sender, EventArgs e)
         {
-            led("1", "5", btn_led_1);
+            led("5", btn_rl05);
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            led("2", "6", btn_led_2);
+            led("6", btn_rl06);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            led("3", "7", btn_led_3);
+            led("7", btn_rl07);
         }
-        void led(string sang, string tat,Button btn_led)
+        private void btn_rl4_Click(object sender, EventArgs e)
         {
-            if (btn_led.Text == "Đang Sáng")
-            {
-                serialcom.Write(tat);
-                btn_led.Text = "Đã Tắt";
-                btn_led.BackColor = SystemColors.Control;
-            }
-            else if (btn_led.Text == "Đã Tắt")
+            led("8", btn_rl08);//do relay 4: hoạc 5 hoạc 5 Ng, 6 Ok
+        }
+        private void btn_rl03_Click(object sender, EventArgs e)
+        {
+            led("3", btn_rl03);
+        }
+
+        private void btn_rl04_Click(object sender, EventArgs e)
+        {
+            led("4", btn_rl04);
+        }
+
+        private void btn_rl02_Click(object sender, EventArgs e)
+        {
+            led("2", btn_rl02);
+        }
+
+        private void btn_rl13_Click(object sender, EventArgs e)
+        {
+            led("1", btn_rl13);
+        }
+        //  void led(string sang, string tat,Button btn_led)
+        void led(string sang, Button btn_led)
+        {
             {
                 serialcom.Write(sang);
-                btn_led.Text = "Đang Sáng";
-                btn_led.BackColor = Color.Red;
             }
         }
-        string atam = "";
-      private void serialcom_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
+      
+        private void serialcom_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
         {
-             
-           
-           // Thread.Sleep(1000);
+            content = "";
+            content = serialcom.ReadLine().ToString();
             serialcom.Encoding = Encoding.ASCII;
-            content = serialcom.ReadExisting();
-            atam = content;
         }
 
         private void btn_tcpip_Click(object sender, EventArgs e)
         {
-           // this.Close();
-            Wifi_Form wififrm = new Wifi_Form();            
+            // this.Close();
+            Wifi_Form wififrm = new Wifi_Form();
             wififrm.ShowDialog();
         }
 
+        private void btn_valrw_Click(object sender, EventArgs e)
+        {
+            lbl_valrw.Text = content;
+        }
+
      
+      
     }
 }
